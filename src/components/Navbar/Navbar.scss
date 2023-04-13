@@ -1,0 +1,35 @@
+@import "../../scss/styles.scss";
+
+.main_table_view {
+    width: stretch;
+
+    .main_table_container {
+        margin: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.7rem;
+        padding-bottom: 0.7rem;
+
+        .main_table_title {
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .main_table_data_block {
+            display: flex;
+            align-items: center;
+
+            .main_table_icon {
+                color: #1D63DC;
+            }
+
+            .main_table_date {
+                margin-left: 0.5rem;
+                font-weight: 500;
+                color: black;
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.main_container {
+    display: flex;
+
+    .main_container_view {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+
+        .main_task_container {
+            margin-top: 1rem;
+            padding-bottom: 1rem;
+            -webkit-box-shadow: -5px 11px 10px -12px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: -5px 11px 10px -12px rgba(34, 60, 80, 0.2);
+            box-shadow: -5px 11px 10px -12px rgba(34, 60, 80, 0.2);
+
+            .main_task_cont_items {
+                display: flex;
+                gap: 1rem;
+                margin-left: 1rem;
+            }
+        }
+    }
+}
