@@ -1,0 +1,105 @@
+@import "../../scss/styles.scss";
+
+.flight_container {
+    display: flex;
+
+    .flight_main_container {
+        margin-top: 2rem;
+        width: stretch;
+        max-width: 1240px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .flight_text_desc {
+        color: gray;
+        font-size: 1.5rem;
+    }
+
+    .flights_info_container {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: center;
+        gap: 3.5rem;
+        align-items: center;
+        display: flex;
+
+        .flights_display_container {
+            display: flex;
+            width: 30%;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            .flight_country_container {
+                background-color: aliceblue;
+                padding: 1rem;
+                border-radius: 1.5rem;
+                background-color: #8bb6ff;
+
+                .flight_from_container {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .bold_style {
+                        font-size: 1.3rem;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+        }
+
+        .flight_select_class_container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: stretch;
+            border: 1px solid #B2BEB5;
+            width: fit-content;
+            padding: 1rem;
+            border-radius: 1.5rem;
+
+            .bold_gray{
+                font-weight: 600;
+                max-width: 70%;
+                font-size: 1.1rem;
+                color: #B2BEB5;
+            }
+
+            .flight_select_class_select_container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                .flight_select_items {
+                    width: 50px;
+                    height: 50px;
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    border-radius: 100%;
+                    overflow: hidden;
+                    border: #B2BEB5 solid 1px;
+
+                    .flight_select_item {
+                        cursor: pointer;
+                        transition-duration: 250ms;
+                        width: 100%;
+
+                        &:hover {
+                            height: 100%;
+                        }
+                    }
+                }
+
+            }
+
+            .bold_text {
+                font-weight: 600;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+}

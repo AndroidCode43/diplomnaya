@@ -4,6 +4,7 @@ import './App.scss';
 import { CreateTicket } from './Pages/CreateTicket/CreateTicket';
 import { Main } from './Pages/Main/Main';
 import { mainStore } from './redux/store';
+import { Flight } from './Pages/Flights/Flights';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='create_ticket' element={<CreateTicket />} />
+          <Route path='flights' element={<Flight/>} />
         </Routes>
       </BrowserRouter>
     </Provider>
