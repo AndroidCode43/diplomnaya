@@ -1,7 +1,7 @@
 @import "../../scss/styles.scss";
 
 .nav_l_container {
-    height: 100vh;
+    height: 100%;
     width: 55px;
     background-color: #1D63DC;
     -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
@@ -11,6 +11,8 @@
 
     &:hover{
         width: 140px;
+        margin-right: 2rem;
+
         .nav_title{
             display: block;
         }

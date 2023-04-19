@@ -1,15 +1,27 @@
+import { useState } from "react";
 import { FlightComponent } from "../../components/FlightComponent/FlightComponent";
 import { NavLeft } from "../../components/NavLeft/NavLeft";
 import "./Flights.scss";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 export const Flight = () => {
+
+    const [ticketInfo, setTicketInfo] = useState({
+        fromCity: "Moscow",
+        toCity: "Dubai",
+        travelClass: 1
+    });
+
+    const updateVlalues = (e) => {
+        setTicketInfo({ ...ticketInfo, [e.target.name]: e.target.value });
+        console.log(ticketInfo);
+    }
+
     return (
         <div className="flight_container">
-            <NavLeft/>
-
+            <NavLeft />
             <div className="flight_main_container">
-                
+
                 <div>
 
                     <div>
@@ -26,18 +38,18 @@ export const Flight = () => {
                                     <p>23RD APR</p>
                                 </div>
                                 <div className="flight_from_container">
-                                    <p className="bold_style">London</p>
+                                    <input className="input_enter_city" placeholder="London" name="fromCity" onChange={(e) => updateVlalues(e)} />
                                     <p className="bold_style">LON</p>
                                 </div>
                             </div>
                             <div className="flight_country_container">
                                 <div className="flight_from_container">
-                                    <p>FROM</p>
+                                    <p>TO</p>
                                     <p>23RD APR</p>
                                 </div>
                                 <div className="flight_from_container">
-                                    <p className="bold_style">London</p>
-                                    <p className="bold_style">LON</p>
+                                    <input className="input_enter_city" placeholder="Dubai" name="toCity" onChange={(e) => updateVlalues(e)} />
+                                    <p className="bold_style">UAE</p>
                                 </div>
                             </div>
 
@@ -48,8 +60,8 @@ export const Flight = () => {
                             <div className="flight_select_class_select_container">
                                 <h4>1</h4>
                                 <div className="flight_select_items">
-                                    <IoIosArrowUp className="flight_select_item"/>
-                                    <IoIosArrowDown className="flight_select_item"/>
+                                    <IoIosArrowUp className="flight_select_item" />
+                                    <IoIosArrowDown className="flight_select_item" />
                                 </div>
                             </div>
                             <p className="bold_text">Эконом/Бизнес/Первый</p>
@@ -57,9 +69,30 @@ export const Flight = () => {
                     </div>
 
                 </div>
+
+                <div className="flight_view_flight_container">
+                    <h3>13 Flights Availiable</h3>
+
+                    <div className="flight_view_container">
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                        <FlightComponent />
+                    </div>
+
+                </div>
+
             </div>
 
-            <FlightComponent />
         </div>
     )
 }

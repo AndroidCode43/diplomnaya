@@ -5,6 +5,7 @@ import { CreateTicket } from './Pages/CreateTicket/CreateTicket';
 import { Main } from './Pages/Main/Main';
 import { mainStore } from './redux/store';
 import { Flight } from './Pages/Flights/Flights';
+import { CreateFlight } from './Pages/CreateFlight/CreateFlight';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='create_ticket' element={<CreateTicket />} />
-          <Route path='flights' element={<Flight/>} />
+          <Route path='create_flight' element={<CreateFlight />} />
+          <Route path='flights' element={<Flight />} />
         </Routes>
       </BrowserRouter>
     </Provider>

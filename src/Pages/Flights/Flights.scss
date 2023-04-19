@@ -2,6 +2,7 @@
 
 .flight_container {
     display: flex;
+    position: relative;
 
     .flight_main_container {
         margin-top: 2rem;
@@ -38,7 +39,14 @@
 
                 .flight_from_container {
                     display: flex;
+                    align-items: center;
                     justify-content: space-between;
+
+                    .input_enter_city{
+                        background-color: transparent;
+                        border: 0px;
+                        font-size: 1.3rem;
+                    }
 
                     .bold_style {
                         font-size: 1.3rem;
@@ -99,6 +107,17 @@
                 font-weight: 600;
                 font-size: 1.2rem;
             }
+        }
+    }
+
+    .flight_view_flight_container{
+        margin-top: 2rem;
+
+        .flight_view_container{
+            display: grid;
+            column-gap: 5rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            transition-duration: 300ms;
         }
     }
 
