@@ -1,35 +1,72 @@
 import { Navbar } from "../../components/Navbar/Navbar";
 import { NavLeft } from "../../components/NavLeft/NavLeft";
-import { IoAirplaneSharp } from "react-icons/io5";
+import { IoCashOutline, IoCardOutline, IoCalendarOutline, IoLockClosedOutline } from "react-icons/io5";
 import "./CreateTicket.scss";
 import { SiS7Airlines } from "react-icons/si";
 import { useEffect, useState } from "react";
-import {getCityByName} from "../../redux/slices/countriesSlice";
 import bg from "../../assets/bg_create.png";
-import { useDispatch, useSelector } from "react-redux";
+import { MdPermIdentity, MdSearch } from "react-icons/md";
+import { FaPassport } from "react-icons/fa";
+import { TicketComponent } from "../../components/TicketComponent/TicketComponent";
+import {useDebounce} from "../../hooks/debounce";
+import {useFlights} from "../../stores/flights";
+import {useTickets} from "../../stores/tickets";
+import {notification} from "antd";
 
 export const CreateTicket = () => {
 
-    const dispatch = useDispatch();
-    const {countries} = useSelector((state) => state.countriesReducer);
+    //сделать отображение ОШИБОК
+    const {flights, errGetFlights, fetchGetFlightByCity} = useFlights();
+    const {errCreateTicket, fetchCreateTicket} = useTickets();
+
+    const [isDrop, setIsDrop] = useState(false);
+    const [selectFlight, setSelectFlight] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState('');
+    const [values, setValues] = useState({
+        passengerName: '',
+        passengerPassport: '',
+        seatType: '',
+    });
+    const [searchValues, setSearchValues] = useState({
+        fromCity: '',
+        intoCity: ''
+    });
+
+    const debounce = useDebounce(searchValues);
 
     useEffect(() => {
-        dispatch(getCityByName());
-    },[]);
+        fetchGetFlightByCity(debounce.fromCity, debounce.intoCity);
+    },[debounce]);
 
-    const [values, setValues] = useState({
-        bio: "Ivan Ivanov",
-        idData: "1234 12345",
-        dob: "01/01/1999",
-    });
+    useEffect(() => {
+        flights.length > 0 ? setIsDrop(true) : setIsDrop(false);
+    },[flights]);
+
+    useEffect(() => {
+        console.log(values);
+    },[values]);
 
     const updateValues = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
-
-    if(countries.length != 0){
-        console.log(countries);
+    const updateSearch = (e) => {
+        setSearchValues({ ...searchValues, [e.target.name]: e.target.value });
     }
+
+    //после выбора рейса, рейс сохраняется в state, делаем isDrop = false, что-бы отключить отображение найденных рейсов
+    const selectFlightClick = (flight) => {
+        setSelectFlight(flight);
+        setIsDrop(false);
+    }
+
+    const createTicketClick = () => {
+        console.log(selectFlight);
+        selectFlight != null ? fetchCreateTicket(values, selectFlight.id) :
+            notification.error({message: 'Ошибка!', description: 'Для создания билета необходимо выбрать класс!', duration: 5});
+    }
+
+    const errNotification = errCreateTicket != null && notification.error({message: 'Произошла ошибка!', description: errCreateTicket, duration: 5});
+
 
     return (
         <div className="create_ticket_main_c">
@@ -42,77 +79,137 @@ export const CreateTicket = () => {
                             <div className="create_user_container">
                                 <SiS7Airlines size={35} className="create_user_img" />
                                 <h1 className="create_user_title">Создание билета</h1>
+
                                 <div className="create_user_inp_container">
-                                    <input value={values.bio} placeholder="Ф.И.О" className="create_user_input" name="bio" onChange={(e) => updateValues(e)} />
-                                    <input value={values.idData} placeholder="Серия номер пасспорта" className="create_user_input" name="idData" onChange={(e) => updateValues(e)} />
-                                    <input value={values.dob} placeholder="Дата рождения" className="create_user_input" name="dob" onChange={(e) => updateValues(e)} />
-                                    <input placeholder="Страна вылета" className="create_user_input" />
-                                    <input placeholder="Вылет из" className="create_user_input" />
-                                    <input placeholder="Страна прилёта" className="create_user_input" />
-                                    <input placeholder="Пункт назначения" className="create_user_input" />
-                                    <input placeholder="Класс" className="create_user_input" />
-                                </div>
-                            </div>
-                            <button className="create_ticket_button">Создать билет</button>
-                        </div>
 
-                        <img src={bg} className="create_ticket_bg" />
-
-                        <div>
-                            <div className="create_ticket_gen_container">
-                                <h1 className="create_ticket_gen_title">Book Flight Ticket</h1>
-                                <h1 className="create_ticket_gen_desc">New features for traveling during the COVID-19 (coronavisrus) outbreak.</h1>
-
-                                <div className="create_ticket_main_cont">
-                                    <div className="create_ticket_gen_cont">
-                                        <div className="create_ticket">
-                                            <div className="create_ticket_header">
-                                                <h1 className="create_ticket_type">Economy Saver</h1>
-                                                <div className="create_ticket_flight">
-                                                    <h1>RU</h1>
-                                                    <IoAirplaneSharp size={15} className="icon" />
-                                                    <h1>UK</h1>
-                                                </div>
-                                            </div>
-                                            <h1 className="create_ticket_count">1 Flight Ticket</h1>
-                                            <div className="create_ticket_item">
-                                                <div className="create_ticket_inform">
-                                                    <h1 className="title">Passenger</h1>
-                                                    <h1 className="desc">{values.bio}</h1>
-                                                </div>
-                                                <div className="create_ticket_inform">
-                                                    <h1 className="title">Date</h1>
-                                                    <h1 className="desc">30 Jan 2023</h1>
-                                                </div>
-                                            </div>
-                                            <div className="create_ticket_item">
-                                                <div className="create_ticket_inform">
-                                                    <h1 className="title">Flight</h1>
-                                                    <h1 className="desc">123131231</h1>
-                                                </div>
-                                                <div className="create_ticket_inform">
-                                                    <h1 className="title">Gate</h1>
-                                                    <h1 className="desc">77 B</h1>
-                                                </div>
-                                            </div>
-                                            <div className="create_ticket_item">
-                                                <div className="create_ticket_inform">
-                                                    <h1 className="title">Class</h1>
-                                                    <h1 className="desc">Economy</h1>
-                                                </div>
-                                                <div className="create_ticket_inform">
-                                                    <h1 className="title">Seats</h1>
-                                                    <h1 className="desc">17 B - 25 B</h1>
-                                                </div>
+                                    <div className="user_flight_info_container">
+                                        <div className="custom_input">
+                                            <p className="title">Фио пассажира</p>
+                                            <div className="input_border">
+                                                <MdPermIdentity />
+                                                <input placeholder="Введите фио" name='passengerName' maxLength={50} onChange={(e) => updateValues(e)}/>
                                             </div>
                                         </div>
+
+                                        <div className="custom_input">
+                                            <p className="title">Серия и номер паспорта</p>
+                                            <div className="input_border">
+                                                <FaPassport />
+                                                <input placeholder="Серия и номер" name='passengerPassport' maxLength={10} onChange={(e) => updateValues(e)}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="dropdown_container">
+                                            <div className="custom_input">
+                                                <p className="title">Страна вылета</p>
+                                                <div className="input_border">
+                                                    <MdSearch />
+                                                    <input placeholder="Страна вылета" name='fromCity' maxLength={50} onChange={(e) => updateSearch(e)} />
+                                                </div>
+                                            </div>
+                                            <div className="custom_input">
+                                                <p className="title">Страна прилёта</p>
+                                                <div className="input_border">
+                                                    <MdSearch />
+                                                    <input placeholder="Страна прилёта" name='intoCity' value={selectFlight?.intoCity} maxLength={50} onChange={(e) => updateSearch(e)} />
+                                                </div>
+                                            </div>
+                                            {
+                                                isDrop && <div className="dropdown_content">
+                                                    {
+                                                        flights?.map((flight) => {
+                                                            return <div className="dropdown_item" onClick={() => selectFlightClick(flight)}>
+                                                                {flight.fromCity} -> {flight.intoCity}
+                                                            </div>
+                                                        })
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+
+                                        {
+                                            selectFlight != null &&
+                                            <div className="choice_flight_container">
+                                                <p><span>Выбран рейс:</span> {selectFlight.nameFlight}</p>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="create_ticket_center"></div>
-                                    <div className="create_ticket_barcode">
-                                        <h1>BARCODE</h1>
+
+                                    <div className="select_class_flight_container">
+                                        <div className='item_container'>
+                                            <input type='radio' name="seatType" value='E' onClick={(e) => updateValues(e)} />
+                                            <h4>Эконом</h4>
+                                        </div>
+                                        <div className='item_container'>
+                                            <input type='radio' name="seatType" value='B' onClick={(e) => updateValues(e)}/>
+                                            <h4>Бизнесс</h4>
+                                        </div>
+                                        <div className='item_container'>
+                                            <input type='radio' name="seatType" value='F' onClick={(e) => updateValues(e)}/>
+                                            <h4>Первый</h4>
+                                        </div>
                                     </div>
+
+                                    <div className="select_payment_metod_container">
+                                        <h3 className="payment_title">Методы оплаты</h3>
+
+                                        <div className="selected_payment_container">
+                                            <input type="radio" name="payment" value="payment_cash" onChange={(e) => setPaymentMethod(e.target.value)} />
+                                            <p>Оплата наличными</p>
+                                            <IoCashOutline size={30} className="payment_metod_icon" />
+                                        </div>
+                                        <div className="selected_payment_container">
+                                            <input type="radio" name="payment" value="payment_card" onChange={(e) => setPaymentMethod(e.target.value)} />
+                                            <p>Оплата по карте</p>
+                                            <IoCardOutline size={30} className="payment_metod_icon" />
+                                        </div>
+
+                                        <div className="select_payment_total_container">
+                                            <p className="total">Итог:</p>
+                                            <p className="total">{}р</p>
+                                        </div>
+
+                                        {
+                                            paymentMethod === "payment_card" &&
+                                            <div className="payment_card_enter_container">
+                                                <div className="custom_input">
+                                                    <p className="title">Номер карты</p>
+                                                    <div className="input_border">
+                                                        <IoCardOutline />
+                                                        <input placeholder="0000 0000 0000" maxLength={10} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="payment_card_enter_flex">
+                                                    <div className="custom_input">
+                                                        <p className="title">Дата</p>
+                                                        <div className="input_border">
+                                                            <IoCalendarOutline />
+                                                            <input placeholder="00/00" maxLength={10} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="custom_input">
+                                                        <p className="title">Код</p>
+                                                        <div className="input_border">
+                                                            <IoLockClosedOutline />
+                                                            <input placeholder="000" maxLength={10} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <button className="create_ticket_button" onClick={() => createTicketClick()}>Оформить билет</button>
                                 </div>
                             </div>
+                        </div>
+
+                        <img src={bg} className="create_ticket_bg" alt='background'/>
+
+                        <div>
+                            <TicketComponent/>
                         </div>
                     </div>
                 </div>

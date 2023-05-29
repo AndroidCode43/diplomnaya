@@ -1,17 +1,28 @@
 import React from "react";
-import "./Navbar.scss";
-import { BsCalendarDay } from "react-icons/bs";
+import styles from "./Navbar.module.scss";
+import { CgShoppingBag, CgLogIn } from "react-icons/cg";
 
-export const Navbar = (props) => {
+export const Navbar = () => {
+
     return (
         <div>
-            <div className="main_table_view">
-                <div className="main_table_container">
-                    <h1 className="main_table_title">{props.title}</h1>
-                    <div className="main_table_data_block">
-                        <BsCalendarDay size={30} className="main_table_icon" />
-                        <h1 className="main_table_date">{props.date}</h1>
+            <div className={styles.main_table_view}>
+                <div className={styles.main_table_container}>
+                    <h1 className={styles.main_table_title}>Ятт<span>Авиаline</span></h1>
+
+                    <div className={styles.right_container}>
+                        <div className={styles.bag_container}>
+                            <CgShoppingBag size={20} />
+                            <div className={styles.count}>
+                                <p>1</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.bag_container}>
+                            <CgLogIn size={20}/>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -1,0 +1,14 @@
+.item_plane_container {
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, rgba(7, 0, 30, 0.1), rgba(55, 0, 255, 0));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0.7rem;
+    box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+    padding: 1rem;
+
+    img {
+        width: 10%;
+        border-radius: 30%;
+    }
+}

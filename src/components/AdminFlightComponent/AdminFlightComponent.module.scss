@@ -1,0 +1,181 @@
+@import "../../scss/styles.scss";
+
+.flight_comp_container{
+  margin: 1rem;
+  background: white;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+  .flight_comp_sect_1{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .ytt{
+      font-weight: 600;
+
+      span{
+        background-color: #1D63DC;
+        color: white;
+        border-top-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+  }
+
+  .flight_comp_but_container{
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+
+    button{
+      background: #007FFE;
+      color: white;
+      border-radius: 0.3rem;
+      padding: 0.3rem 0.5rem;
+    }
+  }
+
+  .flight_center_container{
+    position: relative;
+
+    &::before{
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      right: -17px;
+      border: #b4b4b4 dashed 1px;
+    }
+
+    &::after{
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      left: -17px;
+      bottom: 0;
+      top: 0;
+      background: #b4b4b4;
+    }
+
+    .flight_comp_sect_2{
+      position: relative;
+      height: 100%;
+
+      .about_flight_container{
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .title{
+          font-weight: 500;
+          font-size: 0.9rem;
+          white-space: nowrap;
+          color: #b4b4b4;
+
+          span{
+            font-weight: 700;
+            color: black;
+          }
+        }
+
+        .text_time{
+          height: 30px;
+          white-space: nowrap;
+          font-size: 1.5rem;
+          font-weight: 600;
+
+          span{
+            color: #b4b4b4;
+          }
+        }
+
+        .text_city{
+          font-weight: 600;
+        }
+
+        .about{
+          gap: 0.5rem;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .about_center{
+          align-items: center;
+          gap: 0.5rem;
+          display: flex;
+          flex-direction: column;
+
+          .desc{
+            font-size: 0.8rem;
+            margin-top: auto;
+            margin-bottom: auto;
+            font-weight: 600;
+          }
+
+          .about_center_icon_container{
+            display: flex;
+
+            .about_center_icon{
+              width: 30px;
+              height: 30px;
+              margin-left: auto;
+              margin-right: auto;
+              padding: 0.3rem;
+              border: 1px solid #b4b4b4;
+              border-radius: 100%;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .flight_comp_sect_3{
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    .text_start_price{
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      color: #b4b4b4;
+    }
+
+    .start_price_ticket{
+      height: 30px;
+      white-space: nowrap;
+      font-size: 1rem;
+      font-weight: 600;
+
+      span{
+        color: #b4b4b4;
+      }
+    }
+
+    .btn_view{
+      margin-top: 0.7rem;
+      background: #007FFE;
+      color: white;
+      border-radius: 0.3rem;
+      padding: 0.3rem;
+    }
+  }
+}
+.ticket_info_container{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}

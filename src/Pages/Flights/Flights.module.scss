@@ -1,15 +1,32 @@
 @import "../../scss/styles.scss";
 
 .flight_container {
-    display: flex;
-    position: relative;
+    //background: url('../../../public/bg_airplane.png');
+    //background-size: 100%;
+    height: 100vh;
+
 
     .flight_main_container {
         margin-top: 2rem;
-        width: stretch;
+        width:100%;
         max-width: 1240px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .flight_hello_container {
+        display: flex;
+
+        font-size: 1.1rem;
+        margin: 1.5rem 0rem;
+
+        h3 {
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            font-size: 4rem;
+            color: white;
+        }
     }
 
     .flight_text_desc {
@@ -42,7 +59,7 @@
                     align-items: center;
                     justify-content: space-between;
 
-                    .input_enter_city{
+                    .input_enter_city {
                         background-color: transparent;
                         border: 0px;
                         font-size: 1.3rem;
@@ -67,7 +84,7 @@
             padding: 1rem;
             border-radius: 1.5rem;
 
-            .bold_gray{
+            .bold_gray {
                 font-weight: 600;
                 max-width: 70%;
                 font-size: 1.1rem;
@@ -110,14 +127,15 @@
         }
     }
 
-    .flight_view_flight_container{
+    .flight_view_flight_container {
         margin-top: 2rem;
 
-        .flight_view_container{
-            display: grid;
+        .flight_view_container {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
             column-gap: 5rem;
-            grid-template-columns: 1fr 1fr 1fr;
-            transition-duration: 300ms;
+
         }
     }
 

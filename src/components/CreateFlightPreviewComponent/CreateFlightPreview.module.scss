@@ -1,0 +1,86 @@
+.create_flight_preview_container {
+  width: 400px;
+  border-radius: 0.7rem;
+  -webkit-box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+  box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+
+  .create_flight_preview_header {
+    gap: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 0.7rem;
+    background-color: #1D63DC;
+
+    .create_flight_prev_sec_one {
+      display: flex;
+      opacity: 0.7;
+      font-size: 0.9rem;
+      color: #dddddd;
+      justify-content: space-between;
+    }
+
+    .create_flight_prev_sec_two {
+      display: flex;
+      color: white;
+      font-size: 1.8rem;
+      justify-content: space-between;
+
+      p{
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+
+      .create_flight_prev_sec_two_items {
+        display: flex;
+        align-items: center;
+
+        .divider_flight {
+          height: 2px;
+          border-radius: 100%;
+          width: 40px;
+          background-color: #b4b4b4;
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .create_flight_prev_sec_3 {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      opacity: 0.7;
+      align-items: center;
+      color: #dddddd;
+
+      .flight_h {
+        position: absolute;
+        left: 40%;
+        bottom: 0.4rem;
+        color: white;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .create_flight_preview_body {
+    .create_flight_preview_body_container {
+      padding: 1.5rem;
+
+      .create_flight_preview_body_one {
+        display: flex;
+        color: gray;
+        font-size: 0.9rem;
+        justify-content: space-around;
+      }
+
+      .create_flight_preview_body_two {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+    }
+  }
+}

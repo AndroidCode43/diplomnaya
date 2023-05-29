@@ -14,7 +14,7 @@ export const NavLeft = () => {
 
                         <div className="nav_cont_item">
                             <IoHome size={30} className="nav_item_icon" />
-                            <h1 className="nav_title">Главная</h1>
+                            <h1 className="nav_title">Рейсы</h1>
                         </div>
                         <div className="nav_cont_item">
                             <IoTicketSharp size={30} className="nav_item_icon" />
@@ -30,6 +30,11 @@ export const NavLeft = () => {
                             <IoPeople size={30} className="nav_item_icon" />
                             <h1 className="nav_title">Люди</h1>
                         </div>
+                        <div className="nav_cont_item">
+                            <IoAirplaneSharp size={30} className="nav_item_icon" />
+                            <h1 className="nav_title">Самолёты</h1>
+                        </div>
+                        
                     </div>
                     <div className="nav_cont_logout">
                         <IoLogOutOutline size={30} />

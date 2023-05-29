@@ -1,46 +1,50 @@
-import { HiOutlineCheckCircle, HiCurrencyDollar } from "react-icons/hi";
+import { HiOutlineCheckCircle } from "react-icons/hi";
 import "./PremiumComponent.scss";
+import {useTickets} from "../../stores/tickets";
 
 export const PremiumComponent = (props) => {
+
+    const {setClassTicket} = useTickets();
+
     return (
-        <div>
-            <div className="create_premium_container">
+        <>
+            <div className="create_premium_container" onClick={() => setClassTicket('B', props.price)}>
                 <div className="create_premium_items_container">
-                    <h3 className="create_premium_title">Premium Economy</h3>
-                    <h4 className="create_premium_desc">Cabin: Economy</h4>
+                    <h3 className="create_premium_title">Бизнес-класс</h3>
+                    <p className="create_premium_desc">Кабина бизнес-класса</p>
                     <div>
                         <div className="create_premium_options">
                             <div>
                                 <div className="create_premium_option_item">
                                     <HiOutlineCheckCircle />
-                                    <p>Seat choice</p>
+                                    <p>Автоматический выбор места</p>
                                 </div>
                                 <div className="create_premium_option_item">
-                                    <HiCurrencyDollar />
-                                    <p>Cancellation</p>
+                                    <HiOutlineCheckCircle />
+                                    <p>Бесплатная отмена билета</p>
                                 </div>
                             </div>
                             <div>
                                 <div className="create_premium_option_item">
                                     <HiOutlineCheckCircle />
-                                    <p>Charges</p>
+                                    <p>Зарядная станция</p>
                                 </div>
                                 <div className="create_premium_option_item">
                                     <HiOutlineCheckCircle />
-                                    <p>Personal item</p>
+                                    <p>Персональный приборы</p>
                                 </div>
                             </div>
                         </div>
                         <div className="create_premium_includes">
                             <div className="create_premium_left">
-                                <p>Carry-on:</p>
-                                <p>1st checked bag:</p>
-                                <p>2nd checked bag:</p>
+                                <p>Ручная кладь:</p>
+                                <p>1-я зарегистрированная сумка:</p>
+                                <p>2-я зарегистрированная сумка::</p>
                             </div>
                             <div className="create_premium_right">
-                                <p>Included</p>
-                                <p>$35 up to 23 kg</p>
-                                <p>$45 up to 24kg</p>
+                                <p>Включено</p>
+                                <p>до 15 кг</p>
+                                <p>до 10 кг</p>
                             </div>
                         </div>
                     </div>
@@ -53,6 +57,6 @@ export const PremiumComponent = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

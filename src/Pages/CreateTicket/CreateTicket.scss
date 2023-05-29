@@ -29,15 +29,14 @@
         display: flex;
         justify-content: space-between;
 
-    
+
         .create_ticket_button {
             background-color: #1D63DC;
             color: white;
-            width: stretch;
-            margin-top: 1rem;
+            width: 100%;
+            margin-top: 2rem;
             font-size: 1rem;
             border-radius: 0.5rem;
-            margin-left: 2rem;
             padding: 0.7rem 1rem;
             @extend %c_shadow;
         }
@@ -50,11 +49,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: white;
         padding: 1rem 2.5rem;
         margin-left: 2rem;
-        border-radius: 0.5rem;
-
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 0.7rem;
+        box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
     }
 
     .create_user_img {
@@ -78,141 +79,181 @@
         flex-direction: column;
         margin-bottom: 1rem;
         width: 100%;
-    }
 
-    .create_user_input {
-        width: stretch;
-        margin-top: 1rem;
-        border-color: #B2BEB5;
-        background-color: transparent;
-        border-top: 0;
-        font-size: 0.9rem;
-        color: black;
-        border-left: 0;
-        border-right: 0;
-        padding-bottom: 0.5rem;
-        transition-duration: 300ms;
+        @extend %custom_input;
 
-        &:hover {
-            border-color: #1D63DC;
-        }
-    }
-
-    .create_ticket_gen_container {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-
-        .create_ticket_gen_title {
-            text-align: start;
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
-
-        .create_ticket_gen_desc {
-            margin-top: 1rem;
-            font-size: 1rem;
-            color: #B2BEB5;
-        }
-    }
-
-    .create_ticket_gen_cont {
-        background-color: aliceblue;
-        -webkit-box-shadow: 9px 0px 8px 0px rgba(34, 60, 80, 0.2);
-        -moz-box-shadow: 9px 0px 8px 0px rgba(34, 60, 80, 0.2);
-        box-shadow: 9px 0px 8px 0px rgba(34, 60, 80, 0.2);
-        border-radius: 0.5rem;
-
-        .create_ticket {
-            width: 300px;
-            margin-top: 1.5rem;
-            padding: 1.2rem;
+        .user_flight_info_container {
+            background-color: white;
+            padding: 0.5rem;
             border-radius: 0.5rem;
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 
-            .create_ticket_header {
-                display: flex;
-                justify-content: space-between;
+        }
 
-                .create_ticket_type {
-                    color: white;
-                    font-size: 0.9rem;
-                    background-color: #1D63DC;
-                    padding: 0.3rem 0.5rem;
-                }
+        .dropdown_container {
 
-                .create_ticket_flight {
-                    display: flex;
-                    align-items: center;
+            .dropdown_content {
+                box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+                margin-top: 0.5rem;
+                width: 77%;
+                position: absolute;
+                padding: 0.5rem;
+                background-color: white;
+                border-radius: 0.5rem;
 
-                    h1 {
-                        font-size: 1rem;
-                        font-weight: 600;
-                    }
+                .dropdown_item {
+                    padding: 0.3rem;
+                    cursor: pointer;
+                    transition-duration: 200ms;
 
-                    .icon {
-                        margin: 0 0.5rem;
-                        color: #1D63DC;
-                    }
-                }
-            }
-
-            .create_ticket_count {
-                font-weight: 600;
-                margin-top: 1rem;
-                font-size: 1.4rem;
-            }
-
-            .create_ticket_item {
-                display: flex;
-                margin-top: 1rem;
-                justify-content: space-between;
-
-                .create_ticket_inform {
-                    display: flex;
-                    flex-direction: column;
-
-                    .title {
-                        color: gray;
-                        font-size: 0.8rem;
-                    }
-
-                    .desc {
-                        font-size: 1rem;
-                        font-weight: 600;
+                    &:hover {
+                        background-color: #f5f5f5;
                     }
                 }
             }
         }
-    }
 
-    .create_ticket_center {
-        height: 25px;
-        margin: 0 auto;
-        background-image: radial-gradient(circle, transparent 72%, aliceblue 72%),
-            repeating-linear-gradient(90deg, aliceblue 0, aliceblue 2%, gray 2%, gray 4%),
-            linear-gradient(aliceblue, aliceblue),
-            radial-gradient(circle, transparent 72%, aliceblue 72%);
-        background-position: -12px 0, 12px 50%, 12px 0, calc(100% + 12px) 0;
-        background-repeat: no-repeat;
-        background-size: 25px 25px, calc(100% - 25px) 1px, calc(100% - 24px) 100%, 25px 25px;
+        .choice_flight_container {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            border: #B2BEB5 1px solid;
 
-    }
+            p {
+                font-size: 1rem;
 
-    .create_ticket_barcode {
-        width: 100%;
-        border-radius: 0.5rem;
-        align-items: center;
-        background-color: aliceblue;
-        -webkit-box-shadow: 8px 12px 8px 0px rgba(34, 60, 80, 0.2);
-        -moz-box-shadow: 8px 12px 8px 0px rgba(34, 60, 80, 0.2);
-        box-shadow: 8px 12px 8px 0px rgba(34, 60, 80, 0.2);
+                span {
+                    font-weight: 400;
+                    text-decoration: underline;
+                }
+            }
+        }
 
-        h1 {
-            width: 100%;
-            font-weight: 600;
-            padding-bottom: 1rem;
-            text-align: center;
+        .select_class_flight_container {
+            background-color: white;
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 0.5rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            -webkit-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+
+            .item_container{
+                align-items: center;
+                background-color: #1D63DC;
+                color: white;
+                gap: 0.3rem;
+                padding: 0.3rem;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                border-radius: 0.3rem;
+                display: flex;
+                -webkit-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                cursor: pointer;
+
+                input{
+                    max-width: 20%;
+                }
+
+                h4{
+                    font-size: 0.9rem;
+                }
+            }
+
+            .item {
+                background-color: #1D63DC;
+                color: white;
+                padding: 0.3rem 0;
+                text-align: center;
+                border-radius: 0.3rem;
+                -webkit-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                cursor: pointer;
+            }
+        }
+
+        .select_payment_metod_container {
+            margin-top: 1rem;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+            .payment_title {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+
+            .selected_payment_container {
+                padding: 0.7rem;
+                margin-top: 1rem;
+                display: flex;
+                background-color: whitesmoke;
+                border-radius: 0.3rem;
+                border: 2px white solid;
+                -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                transition-duration: 300ms;
+                cursor: pointer;
+                align-items: center;
+                gap: 0.5rem;
+
+                input {
+                    max-width: 15px;
+                }
+
+                p {
+                    color: black;
+                }
+
+                &:hover {
+                    border-color: #1D63DC;
+                }
+
+                .payment_metod_icon {
+                    background-color: white;
+                    padding: 0.3rem;
+                    border-radius: 0.3rem;
+                    color: black;
+                    -webkit-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                    -moz-box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                    box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
+                }
+            }
+        
+            .payment_card_enter_container{
+                margin-top: 1rem;
+
+                .payment_card_enter_flex{
+                    display: flex;
+                    gap: 1rem;
+                }
+            
+            }
+        
+            .select_payment_total_container{
+                margin: 1rem;
+                display: flex;
+                justify-content: space-between;
+
+                .total{
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                }
+            }
         }
     }
 }

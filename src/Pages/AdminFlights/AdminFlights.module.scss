@@ -1,0 +1,13 @@
+.admin_flight_container{
+  display: flex;
+
+  .admin_items_container{
+    margin-top: 1.5rem;
+
+    .admin_item_view_flight{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

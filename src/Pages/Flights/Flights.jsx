@@ -1,10 +1,17 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { FlightComponent } from "../../components/FlightComponent/FlightComponent";
-import { NavLeft } from "../../components/NavLeft/NavLeft";
-import "./Flights.scss";
+import styles from "./Flights.module.scss";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { Navbar } from "../../components/Navbar/Navbar";
+import {useFlights} from "../../stores/flights";
 
 export const Flight = () => {
+
+    const {flights, fetchGetFlights} = useFlights();
+
+    useEffect(() => {
+        fetchGetFlights();
+    },[]);
 
     const [ticketInfo, setTicketInfo] = useState({
         fromCity: "Moscow",
@@ -18,75 +25,72 @@ export const Flight = () => {
     }
 
     return (
-        <div className="flight_container">
-            <NavLeft />
-            <div className="flight_main_container">
+        <div className={styles.flight_container}>
+            <Navbar />
+
+            <div className={styles.flight_main_container}>
 
                 <div>
 
-                    <div>
-                        <h1>Book Flights</h1>
-                        <h4 className="flight_text_desc">Book International & Domestic Flights</h4>
+                    <div className={styles.flight_hello_container}>
+                        <h3>Готов к взлёту?</h3>
                     </div>
 
-                    <div className="flights_info_container">
-                        <div className="flights_display_container">
+                    <div>
+                        <h1>Book Flights</h1>
+                        <h4 className={styles.flight_text_desc}>Book International & Domestic Flights</h4>
+                    </div>
 
-                            <div className="flight_country_container">
-                                <div className="flight_from_container">
+                    <div className={styles.flights_info_container}>
+                        <div className={styles.flights_display_container}>
+
+                            <div className={styles.flight_country_container}>
+                                <div className={styles.flight_from_container}>
                                     <p>FROM</p>
                                     <p>23RD APR</p>
                                 </div>
-                                <div className="flight_from_container">
-                                    <input className="input_enter_city" placeholder="London" name="fromCity" onChange={(e) => updateVlalues(e)} />
-                                    <p className="bold_style">LON</p>
+                                <div className={styles.flight_from_container}>
+                                    <input className={styles.input_enter_city} placeholder="London" name="fromCity" onChange={(e) => updateVlalues(e)} />
+                                    <p className={styles.bold_style}>LON</p>
                                 </div>
                             </div>
-                            <div className="flight_country_container">
-                                <div className="flight_from_container">
+                            <div className={styles.flight_country_container}>
+                                <div className={styles.flight_from_container}>
                                     <p>TO</p>
                                     <p>23RD APR</p>
                                 </div>
-                                <div className="flight_from_container">
-                                    <input className="input_enter_city" placeholder="Dubai" name="toCity" onChange={(e) => updateVlalues(e)} />
-                                    <p className="bold_style">UAE</p>
+                                <div className={styles.flight_from_container}>
+                                    <input className={styles.input_enter_city} placeholder="Dubai" name="toCity" onChange={(e) => updateVlalues(e)} />
+                                    <p className={styles.bold_style}>UAE</p>
                                 </div>
                             </div>
 
                         </div>
 
-                        <div className="flight_select_class_container">
-                            <p className="bold_gray">TRAVELLERS & CLASS</p>
-                            <div className="flight_select_class_select_container">
-                                <h4>1</h4>
-                                <div className="flight_select_items">
-                                    <IoIosArrowUp className="flight_select_item" />
-                                    <IoIosArrowDown className="flight_select_item" />
+                        <div className={styles.flight_select_class_container}>
+                            <p className={styles.bold_gray}>TRAVELLERS & CLASS</p>
+                            <div className={styles.flight_select_class_select_container}>
+                                <h4>{ticketInfo.travelClass}</h4>
+                                <div className={styles.flight_select_items}>
+                                    <IoIosArrowUp className={styles.flight_select_item} />
+                                    <IoIosArrowDown className={styles.flight_select_item}/>
                                 </div>
                             </div>
-                            <p className="bold_text">Эконом/Бизнес/Первый</p>
+                            <p className={styles.bold_text}>Эконом/Бизнес/Первый</p>
                         </div>
                     </div>
 
                 </div>
 
-                <div className="flight_view_flight_container">
-                    <h3>13 Flights Availiable</h3>
+                <div className={styles.flight_view_flight_container}>
+                    <h3>{flights.length} Рейса доступны</h3>
 
-                    <div className="flight_view_container">
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
-                        <FlightComponent />
+                    <div className={styles.flight_view_container}>
+                        {
+                            flights?.map((item) => {
+                                return <FlightComponent item={item} key={item.id}/>
+                            })
+                        }
                     </div>
 
                 </div>
