@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import { NavLeft } from "../../components/NavLeft/NavLeft";
 import "./CreateFlight.scss";
-import { HiOutlineChevronRight } from "react-icons/hi";
 import { MdFlightTakeoff, MdFlightLand, MdChairAlt, MdOutlinePriceChange, MdOutlineTimelapse } from "react-icons/md";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { TimePicker } from "antd";
@@ -9,39 +8,38 @@ import dayjs from "dayjs";
 import {notification} from "antd";
 import {useFlights} from "../../stores/flights";
 import {usePlanes} from "../../stores/plane";
-import {useAuth} from "../../stores/auth";
-import {useNavigate} from "react-router-dom";
 import {CreateFlightPreview} from "../../components/CreateFlightPreviewComponent/CreateFlightPreview";
+import {shallow} from "zustand/shallow";
 
 export const CreateFlight = () => {
 
-    const navigate = useNavigate();
+    const {errUploading, fetchCreateFlight, uploadingStatus ,clearError} = useFlights((state) => ({
+        errUploading: state.errUploading,
+        fetchCreateFlight: state.fetchCreateFlight,
+        uploadingStatus: state.uploadingStatus,
+        clearError: state.clearError
+    }), shallow);
 
-    const {errUploading, fetchCreateFlight} = useFlights();
     const {planes, fetchPlanes} = usePlanes();
-    const {fetchIsAdmin, authError, admin} = useAuth();
 
     useEffect(() => {
-        fetchIsAdmin();
-    },[]);
+        clearError();
+        fetchPlanes();
+    },[])
 
     useEffect(() => {
-        admin && fetchPlanes();
-    },[admin])
-
-    //если обнаружены ошибки в авторизации делаем редирект на главную страницу
-    useEffect(() => {
-        authError && navigate('/');
-    },[authError]);
-
-    useEffect(() => {
-        errUploading != null && notification.error({message: 'Произошла ошибка!', description: errUploading, duration: 5});
+        errUploading != null
+        && notification.error({message: 'Произошла ошибка!', description: errUploading, duration: 5});
     },[errUploading])
 
+    useEffect(() => {
+        uploadingStatus && notification.success({message: 'Самолёт был успешно добавлен!'});
+    },[uploadingStatus]);
+
     const [values, setValues] = useState({
-        nameFlight:'Рейс 1',
-        fromCity: "Яранск",
-        intoCity: "Киров",
+        nameFlight:'Рейс',
+        fromCity: "",
+        intoCity: "",
         flightDate: "",
         flightTime: "",
         arrivalTime: 0,
@@ -78,6 +76,7 @@ export const CreateFlight = () => {
             return;
         }
         fetchCreateFlight(values, selectPlane.id);
+        //errUploading != null && notification.error({message: 'Произошла ошибка!', description: errUploading, duration: 5});
     }
 
     return (

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Navbar.module.scss";
-import { CgShoppingBag, CgLogIn } from "react-icons/cg";
+import { CgLogIn } from "react-icons/cg";
+import {Link} from "react-router-dom";
 
 export const Navbar = () => {
 
@@ -8,16 +9,9 @@ export const Navbar = () => {
         <div>
             <div className={styles.main_table_view}>
                 <div className={styles.main_table_container}>
-                    <h1 className={styles.main_table_title}>Ятт<span>Авиаline</span></h1>
+                    <Link className={styles.main_table_title} to={'/flights'}>Ятт<span>Авиаline</span></Link>
 
                     <div className={styles.right_container}>
-                        <div className={styles.bag_container}>
-                            <CgShoppingBag size={20} />
-                            <div className={styles.count}>
-                                <p>1</p>
-                            </div>
-                        </div>
-
                         <div className={styles.bag_container}>
                             <CgLogIn size={20}/>
                         </div>

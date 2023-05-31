@@ -7,11 +7,15 @@ export const useFlights = create(devtools(setState => ({
     flights:[],
     errGetFlights: null,
     errUploading: null,
+
+    uploadingStatus: null,
+
     currentFlight: null,
+
+    clearError: () => setState({errUploading: null, errGetFlights: null}),
 
     fetchCreateFlight: async (flight, id) => {
         setState({errUploading: null});
-
         const updateData = {
             ...flight,
             arrivalTime: +flight.arrivalTime,
@@ -21,9 +25,11 @@ export const useFlights = create(devtools(setState => ({
         };
 
         try {
-            await yttAxios.post(`/flights/${id}`, updateData);
+            await yttAxios.post(`/flights/${id}`, updateData).then(() => {
+                setState({uploadingStatus: true, errUploading: null});
+            });
         }catch (e){
-            setState({errUploading: parseError(e)});
+            setState({errUploading: parseError(e), isUploading: false});
         }
     },
 

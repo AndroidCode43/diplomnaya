@@ -4,8 +4,8 @@ import { IoAirplaneSharp } from "react-icons/io5";
 export const TicketComponent = () => {
     return <>
         <div className={styles.create_ticket_gen_container}>
-            <h1 className={styles.create_ticket_gen_title}>Book Flight Ticket</h1>
-            <h1 className={styles.create_ticket_gen_desc}>New features for traveling during the COVID-19 (coronavisrus) outbreak.</h1>
+            <h1 className={styles.create_ticket_gen_title}>Предпросмотр билета</h1>
+            <p className={styles.create_ticket_gen_desc}>Снизу отображается препросмотр оформляемого билета.</p>
 
             <div className={styles.create_ticket_main_cont}>
                 <div className={styles.create_ticket_gen_cont}>

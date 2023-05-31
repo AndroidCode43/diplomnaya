@@ -10,7 +10,7 @@ export const AdminFlights = () => {
     const {fetchGetFlightsWithTickets, errGetFlights, flights} = useFlights();
 
     useEffect(() => {
-        fetchGetFlightsWithTickets();
+       fetchGetFlightsWithTickets();
     },[]);
 
     return <>

@@ -37,8 +37,8 @@ export const EconomyComponent = (props) => {
                     <div className="divider" />
 
                     <div className="create_economy_price_container">
-                        <p className="create_economy_price">{props.price} руб.</p>
-                        <p className="create_economy_price_desc">{props.price} руб. за 1 билет</p>
+                        <p className="create_economy_price">{props.price}₽</p>
+                        <p className="create_economy_price_desc">{props.price}₽ за 1 билет</p>
                     </div>
                 </div>
             </div>

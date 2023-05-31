@@ -130,12 +130,16 @@
     .flight_view_flight_container {
         margin-top: 2rem;
 
+        @media (max-width: 700px) {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
         .flight_view_container {
             align-items: center;
             display: flex;
             flex-direction: column;
             column-gap: 5rem;
-
         }
     }
 

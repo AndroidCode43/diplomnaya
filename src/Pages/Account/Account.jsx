@@ -4,24 +4,45 @@ import { FaRegUser, FaRegUserCircle } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaBirthdayCake, FaPassport, FaRubleSign } from "react-icons/fa";
 import {useAccount} from "../../stores/account";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Navigate} from "react-router-dom";
 import {TicketInfo} from "../../components/TicketInfo/TicketInfo";
+import {IoCalendarOutline, IoCardOutline, IoLockClosedOutline} from "react-icons/io5";
+import {shallow} from "zustand/shallow";
+import {notification} from "antd";
+import {convertDate, convertDobDate} from "../../utils/utils";
 
 export const Account = () => {
 
-    //СДЕЛАТЬ КАСТОМНЫЙ AXIOS И ВШИТЬ ТУДА АВТОРИЗАЦИЮ
-    const {accountError, accountData, fetchGetMyAccount} = useAccount();
+    const {accountError, accountData, fetchGetMyAccount, fetchAddBalance, paymentError} = useAccount((state) => ({
+        accountError: state.accountError,
+        paymentError: state.paymentError,
 
-    const navigate = useNavigate();
+        accountData: state.accountData,
+        fetchGetMyAccount: state.fetchGetMyAccount,
+        fetchAddBalance: state.fetchAddBalance
+    }), shallow);
+
+    const [values, setValues] = useState({
+        cardNumber: '',
+        date: '',
+        cvv: '',
+        amount: 0
+    });
+
+    const updateValues = (e) => setValues({...values, [e.target.name]: e.target.value});
 
     useEffect(() => {
         fetchGetMyAccount();
     },[])
 
     useEffect(() => {
-        accountError != null && navigate('/login');
+        accountError != null && Navigate('/login');
         }, [accountError]);
+
+    useEffect(() => {
+        paymentError != null && notification.error({message: 'Ошибка при оплате!', description: paymentError, duration: 5});
+    },[paymentError]);
 
     return <>
         <div className={styles.account_container}>
@@ -45,43 +66,104 @@ export const Account = () => {
                         </div>
 
                         <div className={styles.user_info_flex_container}>
-                            <div className={styles.information_container}>
-                                <div className={styles.left_container}>
-                                    <div className={styles.flex_container}>
-                                        <FaRegUserCircle size={15}/>
-                                        <p>Фио</p>
+                            <div>
+
+                                <div className={styles.information_container}>
+                                    <table>
+                                        <tr>
+                                            <th className={styles.th_black}>
+                                                <div className={styles.flex_container}>
+                                                    <FaRegUserCircle size={15}/>
+                                                    <p>Фио</p>
+                                                </div></th>
+                                            <th>{accountData?.name}</th>
+                                        </tr>
+                                        <tr>
+                                            <th className={styles.th_black}>
+                                                <div className={styles.flex_container}>
+                                                    <AiOutlineMail size={15}/>
+                                                    <p>Email</p>
+                                                </div>
+                                            </th>
+                                            <th>{accountData?.email}</th>
+                                        </tr>
+                                        <tr>
+                                            <th className={styles.th_black}>
+                                                <div className={styles.flex_container}>
+                                                    <FaPassport size={15}/>
+                                                    <p>Серия и номер</p>
+                                                </div>
+                                            </th>
+                                            <th>{accountData?.passportNumber}</th>
+                                        </tr>
+                                        <tr>
+                                            <th className={styles.th_black}>
+                                                <div className={styles.flex_container}>
+                                                    <FaBirthdayCake size={15}/>
+                                                    <p>День рождения</p>
+                                                </div>
+                                            </th>
+                                            <th>{convertDobDate(accountData?.dob)}</th>
+                                        </tr>
+                                        <tr>
+                                            <th className={styles.th_black}>
+                                                    <div className={styles.flex_container}>
+                                                        <FaRubleSign size={15}/>
+                                                        <p>Баланс</p>
+                                                    </div>
+                                            </th>
+                                            <th>{accountData?.balance}₽</th>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                                <div className={styles.payment_card_enter_container}>
+
+                                    <h3>Пополнение баланса</h3>
+
+                                    <div className={styles.custom_input}>
+                                        <p className={styles.title}>Номер карты</p>
+                                        <div>
+                                            <IoCardOutline />
+                                            <input placeholder="0000 0000 0000" maxLength={10} name='cardNumber' onChange={(e) => updateValues(e)}/>
+                                        </div>
                                     </div>
 
-                                    <div className={styles.flex_container}>
-                                        <AiOutlineMail size={15}/>
-                                        <p>Email</p>
+                                    <div className={styles.payment_card_enter_flex}>
+                                        <div className={styles.custom_input}>
+                                            <p className={styles.title}>Дата</p>
+                                            <div className={styles.input_border}>
+                                                <IoCalendarOutline />
+                                                <input placeholder="00/00" maxLength={10} name='date' onChange={(e) => updateValues(e)}/>
+                                            </div>
+                                        </div>
+                                        <div className={styles.custom_input}>
+                                            <p className={styles.title}>Код</p>
+                                            <div className={styles.input_border}>
+                                                <IoLockClosedOutline />
+                                                <input placeholder="000" maxLength={10} name='cvv' onChange={(e) => updateValues(e)}/>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className={styles.flex_container}>
-                                        <FaPassport size={15}/>
-                                        <p>Серия и номер</p>
+
+                                    <div className={styles.custom_input}>
+                                        <p className={styles.title}>Пополнить баланс</p>
+                                        <div>
+                                            <FaRubleSign/>
+                                            <input placeholder="1000 рублей" maxLength={10} name='amount' onChange={(e) => updateValues(e)}/>
+                                        </div>
                                     </div>
-                                    <div className={styles.flex_container}>
-                                        <FaBirthdayCake size={15}/>
-                                        <p>День рождения</p>
-                                    </div>
-                                    <div className={styles.flex_container}>
-                                        <FaRubleSign size={15}/>
-                                        <p>Баланс</p>
-                                    </div>
-                                </div>
-                                <div className={styles.right_container}>
-                                    <p>{accountData?.name}</p>
-                                    <p>{accountData?.email}</p>
-                                    <p>{accountData?.passportNumber}</p>
-                                    <p>{accountData?.dob}</p>
-                                    <p>{accountData?.balance} руб.</p>
+
+                                    <button className={styles.add_fund_btn} onClick={() => fetchAddBalance(values)}>Пополнить</button>
+
                                 </div>
                             </div>
 
                             <div className={styles.users_tickets_container}>
                                 {
                                     accountData?.tickets?.map((ticket) => {
-                                        return <TicketInfo item={ticket} />
+                                        return <TicketInfo item={ticket} key={ticket.id}/>
                                     })
                                 }
                             </div>

@@ -73,12 +73,11 @@ export const CreateTicket = () => {
             <NavLeft />
             <div className="create_ticket_container">
                 <div className="create_ticket_cont">
-                    <Navbar title="Создание билета" date="02.02.20" />
                     <div className="create_ticket_add_container">
                         <div>
                             <div className="create_user_container">
                                 <SiS7Airlines size={35} className="create_user_img" />
-                                <h1 className="create_user_title">Создание билета</h1>
+                                <h1 className="create_user_title">Оформление билета</h1>
 
                                 <div className="create_user_inp_container">
 

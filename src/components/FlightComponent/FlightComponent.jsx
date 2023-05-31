@@ -12,7 +12,7 @@ export const FlightComponent = (props) => {
 
     return (
         <>
-            <div className={styles.flight_comp_container}>
+            <div className={styles.flight_comp_container} onClick={() => navigate(`/flight/${id}`)}>
                 <div className={styles.flight_comp_sect_1}>
                     <p className={styles.ytt}>Ятт<span>Авиаline</span></p>
                 </div>

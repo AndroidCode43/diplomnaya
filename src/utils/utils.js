@@ -21,3 +21,8 @@ export const convertDate = (date) => {
     moment.locale('ru');
     return moment(date).format('MMM Do');
 }
+
+export const convertDobDate = (date) => {
+    moment.locale('ru');
+    return moment(date).format('Do MMMM YYYY');
+}

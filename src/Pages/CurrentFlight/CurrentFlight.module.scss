@@ -3,6 +3,12 @@
   margin-top: 1.5rem;
   justify-content: space-around;
 
+  @media (max-width: 700px) {
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
   .timeline_container{
     margin-top: 1.5rem;
   }

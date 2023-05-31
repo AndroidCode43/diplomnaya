@@ -13,6 +13,7 @@ export const Flight = () => {
         fetchGetFlights();
     },[]);
 
+
     const [ticketInfo, setTicketInfo] = useState({
         fromCity: "Moscow",
         toCity: "Dubai",
@@ -32,52 +33,52 @@ export const Flight = () => {
 
                 <div>
 
-                    <div className={styles.flight_hello_container}>
-                        <h3>Готов к взлёту?</h3>
-                    </div>
+                    {/*<div className={styles.flight_hello_container}>*/}
+                    {/*    <h3>Готов к взлёту?</h3>*/}
+                    {/*</div>*/}
 
-                    <div>
-                        <h1>Book Flights</h1>
-                        <h4 className={styles.flight_text_desc}>Book International & Domestic Flights</h4>
-                    </div>
+                    {/*<div>*/}
+                    {/*    <h1>Book Flights</h1>*/}
+                    {/*    <h4 className={styles.flight_text_desc}>Book International & Domestic Flights</h4>*/}
+                    {/*</div>*/}
 
                     <div className={styles.flights_info_container}>
-                        <div className={styles.flights_display_container}>
+                        {/*<div className={styles.flights_display_container}>*/}
 
-                            <div className={styles.flight_country_container}>
-                                <div className={styles.flight_from_container}>
-                                    <p>FROM</p>
-                                    <p>23RD APR</p>
-                                </div>
-                                <div className={styles.flight_from_container}>
-                                    <input className={styles.input_enter_city} placeholder="London" name="fromCity" onChange={(e) => updateVlalues(e)} />
-                                    <p className={styles.bold_style}>LON</p>
-                                </div>
-                            </div>
-                            <div className={styles.flight_country_container}>
-                                <div className={styles.flight_from_container}>
-                                    <p>TO</p>
-                                    <p>23RD APR</p>
-                                </div>
-                                <div className={styles.flight_from_container}>
-                                    <input className={styles.input_enter_city} placeholder="Dubai" name="toCity" onChange={(e) => updateVlalues(e)} />
-                                    <p className={styles.bold_style}>UAE</p>
-                                </div>
-                            </div>
+                        {/*    <div className={styles.flight_country_container}>*/}
+                        {/*        <div className={styles.flight_from_container}>*/}
+                        {/*            <p>FROM</p>*/}
+                        {/*            <p>23RD APR</p>*/}
+                        {/*        </div>*/}
+                        {/*        <div className={styles.flight_from_container}>*/}
+                        {/*            <input className={styles.input_enter_city} placeholder="London" name="fromCity" onChange={(e) => updateVlalues(e)} />*/}
+                        {/*            <p className={styles.bold_style}>LON</p>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*    <div className={styles.flight_country_container}>*/}
+                        {/*        <div className={styles.flight_from_container}>*/}
+                        {/*            <p>TO</p>*/}
+                        {/*            <p>23RD APR</p>*/}
+                        {/*        </div>*/}
+                        {/*        <div className={styles.flight_from_container}>*/}
+                        {/*            <input className={styles.input_enter_city} placeholder="Dubai" name="toCity" onChange={(e) => updateVlalues(e)} />*/}
+                        {/*            <p className={styles.bold_style}>UAE</p>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
 
-                        </div>
+                        {/*</div>*/}
 
-                        <div className={styles.flight_select_class_container}>
-                            <p className={styles.bold_gray}>TRAVELLERS & CLASS</p>
-                            <div className={styles.flight_select_class_select_container}>
-                                <h4>{ticketInfo.travelClass}</h4>
-                                <div className={styles.flight_select_items}>
-                                    <IoIosArrowUp className={styles.flight_select_item} />
-                                    <IoIosArrowDown className={styles.flight_select_item}/>
-                                </div>
-                            </div>
-                            <p className={styles.bold_text}>Эконом/Бизнес/Первый</p>
-                        </div>
+                        {/*<div className={styles.flight_select_class_container}>*/}
+                        {/*    <p className={styles.bold_gray}>TRAVELLERS & CLASS</p>*/}
+                        {/*    <div className={styles.flight_select_class_select_container}>*/}
+                        {/*        <h4>{ticketInfo.travelClass}</h4>*/}
+                        {/*        <div className={styles.flight_select_items}>*/}
+                        {/*            <IoIosArrowUp className={styles.flight_select_item} />*/}
+                        {/*            <IoIosArrowDown className={styles.flight_select_item}/>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*    <p className={styles.bold_text}>Эконом/Бизнес/Первый</p>*/}
+                        {/*</div>*/}
                     </div>
 
                 </div>
@@ -94,7 +95,6 @@ export const Flight = () => {
                     </div>
 
                 </div>
-
             </div>
 
         </div>

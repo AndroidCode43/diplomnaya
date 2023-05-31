@@ -4,14 +4,29 @@
   display: flex;
   gap: 3rem;
 
+  @media (max-width: 700px) {
+    position: relative;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   .login_auth_container{
     max-width: 40%;
     margin-top: auto;
     margin-bottom: auto;
     height: 100%;
 
+    @media (max-width: 700px) {
+      max-width: 100%;
+    }
+
     .auth_container{
       padding: 1rem 2rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 0.5rem;
+      box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
 
       .login_hello_container{
         margin-bottom:  1.5rem;
@@ -19,13 +34,19 @@
         .title{
           font-weight: 600;
           text-align: center;
+          font-size: 1.5rem;
           width: 100%;
         }
 
         .desc{
           margin-top: 0.5rem;
-
           color: #b4b4b4;
+          font-weight: 400;
+
+          @media (max-width: 700px){
+            color: white;
+            text-align: center;
+          }
         }
       }
 
@@ -84,6 +105,12 @@
   }
 
   .icon_container{
+
+    @media (max-width: 700px) {
+      position: absolute;
+      z-index: -1;
+    }
+
     img{
       border-radius: 1rem;
     }

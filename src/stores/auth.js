@@ -15,7 +15,7 @@ export const useAuth = create(devtools(setState => ({
             const { data } = await yttAxios.post(`/auth/login`, user);
             Cookies.set('token', data.token, {
                 expires: 7,
-                path: ''
+                path: '/'
             });
             setState({isLoggedIn: true});
         }catch (e){
@@ -27,7 +27,8 @@ export const useAuth = create(devtools(setState => ({
         setState({authError: null});
         try {
             const {data} = await yttAxios.get(`/users/admin`);
-            setState({admin: data});
+            setState({admin: data, authError: null});
+            console.log(data);
         }catch (e){
             console.log(parseError(e));
             setState({authError: parseError(e), admin: null});
