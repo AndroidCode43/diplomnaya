@@ -6,16 +6,14 @@
 
 .create_ticket_container {
     display: flex;
-    width: stretch;
+    width: unset;
     max-width: 1240px;
     margin-left: auto;
     margin-right: auto;
 
-    .create_ticket_bg {
-        z-index: -1;
-        height: 80vh;
-        left: 26%;
+    .bg_img{
         position: absolute;
+        z-index: -1;
     }
 
     .create_ticket_cont {
@@ -29,6 +27,12 @@
         display: flex;
         justify-content: space-between;
 
+        @media (max-width: 700px) {
+            flex-direction: column;
+            width: unset;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
 
         .create_ticket_button {
             background-color: #1D63DC;
@@ -43,19 +47,26 @@
     }
 
     .create_user_container {
-        z-index: 10;
+        z-index: 1;
         width: 350px;
         @extend %c_shadow;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 1rem 2.5rem;
+        padding: 1rem 2rem;
         margin-left: 2rem;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-radius: 0.7rem;
         box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+
+        @media (max-width: 700px) {
+            padding: 1rem 1rem;
+            margin-left: 0;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
     }
 
     .create_user_img {
@@ -71,6 +82,7 @@
         font-size: 1.3rem;
         font-weight: 600;
         margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .create_user_inp_container {
@@ -83,21 +95,23 @@
         @extend %custom_input;
 
         .user_flight_info_container {
-            background-color: white;
             padding: 0.5rem;
+            z-index: 1;
             border-radius: 0.5rem;
-            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
+            box-shadow: 5px 5px 10px rgba(0,0,0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(3px);
         }
 
         .dropdown_container {
 
             .dropdown_content {
+                z-index: 10;
                 box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
                 margin-top: 0.5rem;
-                width: 77%;
+                width: 95%;
                 position: absolute;
                 padding: 0.5rem;
                 background-color: white;
@@ -121,6 +135,7 @@
             background-color: white;
             border-radius: 0.5rem;
             border: #B2BEB5 1px solid;
+            z-index: 10;
 
             p {
                 font-size: 1rem;
@@ -160,6 +175,8 @@
                 box-shadow: 4px 4px 8px -5px rgba(34, 60, 80, 0.2);
                 cursor: pointer;
 
+
+
                 input{
                     max-width: 20%;
                 }
@@ -184,12 +201,14 @@
 
         .select_payment_metod_container {
             margin-top: 1rem;
-            background-color: white;
+            z-index: 0;
             padding: 0.5rem;
             border-radius: 0.5rem;
-            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 5px 5px 10px rgba(0,0,0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(3px);
 
             .payment_title {
                 font-size: 1.1rem;
@@ -200,9 +219,9 @@
                 padding: 0.7rem;
                 margin-top: 1rem;
                 display: flex;
-                background-color: whitesmoke;
+                background-color: white;
                 border-radius: 0.3rem;
-                border: 2px white solid;
+                border: 2px whitesmoke solid;
                 -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
                 -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
                 box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);

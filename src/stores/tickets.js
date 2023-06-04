@@ -6,7 +6,10 @@ import yttAxios from "../utils/axios_settings";
 export const useTickets = create(devtools(setState => ({
     errCreateTicket: null,
     selectClassTicket:null,
+    tickets: null,
+    selectTickets: null,
 
+    clearError: () => setState({errCreateTicket:null}),
 
     setClassTicket: (classTicket, price) => {
         setState({
@@ -31,6 +34,26 @@ export const useTickets = create(devtools(setState => ({
         try {
             await yttAxios.post(`/tickets/buy_ticket?seatType=${seatType}&flightId=${flightId}`);
         }catch (e){
+            setState({errCreateTicket: parseError(e)});
+        }
+    },
+
+    fetchGetAllTickets: async () => {
+        setState({errCreateTicket: null});
+        try {
+            const {data} = await yttAxios.get('/tickets/all');
+            setState({tickets: data});
+        }catch(e){
+            setState({errCreateTicket: parseError(e)});
+        }
+    },
+
+    fetchGetTodayTickets: async () => {
+        setState({errCreateTicket: null});
+        try {
+            const {data} = await yttAxios.get('/tickets/today');
+            setState({selectTickets: data});
+        }catch(e){
             setState({errCreateTicket: parseError(e)});
         }
     }

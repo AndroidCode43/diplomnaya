@@ -10,17 +10,21 @@ import {TicketInfo} from "../../components/TicketInfo/TicketInfo";
 import {IoCalendarOutline, IoCardOutline, IoLockClosedOutline} from "react-icons/io5";
 import {shallow} from "zustand/shallow";
 import {notification} from "antd";
-import {convertDate, convertDobDate} from "../../utils/utils";
+import {convertDobDate} from "../../utils/utils";
+import bg from "../../assets/svg_planet.svg";
 
 export const Account = () => {
 
-    const {accountError, accountData, fetchGetMyAccount, fetchAddBalance, paymentError} = useAccount((state) => ({
+    const {accountError, accountData, fetchGetMyAccount, fetchAddBalance,
+        paymentError, paymentSuccess, clearState} = useAccount((state) => ({
         accountError: state.accountError,
         paymentError: state.paymentError,
+        paymentSuccess: state.paymentSuccess,
 
         accountData: state.accountData,
         fetchGetMyAccount: state.fetchGetMyAccount,
-        fetchAddBalance: state.fetchAddBalance
+        fetchAddBalance: state.fetchAddBalance,
+        clearState: state.clearState
     }), shallow);
 
     const [values, setValues] = useState({
@@ -33,6 +37,7 @@ export const Account = () => {
     const updateValues = (e) => setValues({...values, [e.target.name]: e.target.value});
 
     useEffect(() => {
+        clearState();
         fetchGetMyAccount();
     },[])
 
@@ -44,10 +49,17 @@ export const Account = () => {
         paymentError != null && notification.error({message: 'Ошибка при оплате!', description: paymentError, duration: 5});
     },[paymentError]);
 
+    useEffect(() => {
+        paymentSuccess != null && notification.success({message: paymentSuccess, duration: 2});
+    },[paymentSuccess]);
+
     return <>
         <div className={styles.account_container}>
             <LayoutHeader>
                 <div className={styles.items_container}>
+
+                    <img src={bg} className={styles.bg_img}/>
+
                     <div>
                         <h1 className={styles.main_title}>Ваш аккаунт</h1>
                         <p className={styles.desc}>Ваш аккаунт полностью готов к работе, вы можете смело заказывать билеты!</p>

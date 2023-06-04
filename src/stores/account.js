@@ -7,6 +7,9 @@ export const useAccount = create(devtools(setState => ({
     accountData: null,
     accountError: null,
     paymentError: null,
+    paymentSuccess: null,
+
+    clearState: () => setState({paymentError: null, paymentSuccess: null}),
 
     fetchGetMyAccount: async () => {
         setState({accountError: null});
@@ -21,7 +24,12 @@ export const useAccount = create(devtools(setState => ({
     fetchAddBalance: async (dto) => {
         setState({paymentError: null});
         try {
-           await yttAxios.post('/users/add_balance', {...dto, amount: Number(dto.amount)});
+           await yttAxios.post('/users/add_balance', {...dto, amount: Number(dto.amount)})
+               .then(async () => {
+                   const {data} = await yttAxios.get(`/users/me`);
+                   setState({accountData: data});
+               });
+           setState({paymentSuccess: 'Оплата прошла успешно!'});
         }catch (e){
             setState({paymentError: parseError(e)});
         }

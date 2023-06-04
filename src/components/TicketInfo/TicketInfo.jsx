@@ -1,7 +1,7 @@
 import styles from "./TicketInfo.module.scss";
 import {IoAirplaneSharp} from "react-icons/io5";
 import Barcode from "react-barcode";
-import {convertDate} from "../../utils/utils";
+import {convertDate, convertSeatType} from "../../utils/utils";
 
 export const TicketInfo = (props) => {
 
@@ -43,7 +43,7 @@ export const TicketInfo = (props) => {
                     <div className={styles.create_ticket_item}>
                         <div className={styles.create_ticket_inform}>
                             <h1 className={styles.title}>Класс</h1>
-                            <h1 className={styles.desc}>Эконом</h1>
+                            <h1 className={styles.desc}>{convertSeatType(seatType)}</h1>
                         </div>
                         <div className={styles.create_ticket_inform}>
                             <h1 className={styles.title}>Место</h1>

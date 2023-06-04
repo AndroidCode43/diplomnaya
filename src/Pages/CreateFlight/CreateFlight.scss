@@ -1,18 +1,6 @@
 .create_flight_container {
     display: flex;
 
-    &::before{
-        content: '';
-        position: absolute;
-        width: 100px;
-        height: 100px;
-        z-index: -1;
-        background: linear-gradient(#1D63DC, #f0f);
-        clip-path: circle();
-        right: 30%;
-        bottom: 35%;
-    }
-
     .create_flight_content_container {
         margin-left: auto;
         margin-right: auto;
@@ -27,20 +15,31 @@
         margin-left: auto;
         margin-right: auto;
 
+        .bg_img{
+            position: absolute;
+            z-index: -1;
+        }
+
         .create_flight_content {
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            .preview_container{
+                width: stretch;
+                margin: 0rem 1rem;
+            }
         }
 
         .create_flight_inputs_container {
             margin-top: 1.5rem;
             width: fit-content;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 10px 10px 20px rgba(0,0,0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(3px);
             border-radius: 0.7rem;
-            box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
 
             .inputs_container {
                 padding: 1.5rem;

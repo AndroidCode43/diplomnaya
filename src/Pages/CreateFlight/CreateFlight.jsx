@@ -10,6 +10,7 @@ import {useFlights} from "../../stores/flights";
 import {usePlanes} from "../../stores/plane";
 import {CreateFlightPreview} from "../../components/CreateFlightPreviewComponent/CreateFlightPreview";
 import {shallow} from "zustand/shallow";
+import bg from '../../assets/svg_planet.svg';
 
 export const CreateFlight = () => {
 
@@ -86,11 +87,16 @@ export const CreateFlight = () => {
                 <div className="create_flight_content_container">
                     <Navbar />
                     <div className="create_flight_main_container">
+
+                        <img src={bg} className='bg_img'/>
+
                         <div className="create_flight_content">
-                            <CreateFlightPreview item={{
-                                ...values,
-                                plane: selectPlane
-                            }}/>
+                            <div className='preview_container'>
+                                <CreateFlightPreview item={{
+                                    ...values,
+                                    plane: selectPlane
+                                }}/>
+                            </div>
 
                             <div className="create_flight_inputs_container">
                                 <div className="inputs_container">

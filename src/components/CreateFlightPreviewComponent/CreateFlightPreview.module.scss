@@ -1,9 +1,14 @@
 .create_flight_preview_container {
   width: unset;
   border-radius: 0.7rem;
-  -webkit-box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
-  box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+  box-shadow: 10px 10px 20px rgba(0,0,0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(3px);
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
 
   .create_flight_preview_header {
     gap: 0.3rem;
@@ -19,6 +24,11 @@
       font-size: 0.9rem;
       color: #dddddd;
       justify-content: space-between;
+
+      .flight_h {
+        color: white;
+        font-weight: 600;
+      }
     }
 
     .create_flight_prev_sec_two {

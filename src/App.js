@@ -11,6 +11,8 @@ import {Login} from "./Pages/auth/Login/Login";
 import {Account} from "./Pages/Account/Account";
 import {CurrentFlight} from "./Pages/CurrentFlight/CurrentFlight";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import {Dashboard} from "./Pages/Dashboard/Dashboard";
+import {Tickets} from "./Pages/Tickets/Tickets";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
               <Route path='admin/create_flight' element={<CreateFlight />} />
               <Route path='admin/flights' element={<AdminFlights/>} />
               <Route path='admin/planes' element={<Planes/>} />
+              <Route path='admin/dashboard' element={<Dashboard/>} />
+              <Route path='admin/tickets' element={<Tickets/>} />
           </Route>
         </Routes>
       </BrowserRouter>

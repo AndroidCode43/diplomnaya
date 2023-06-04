@@ -22,7 +22,20 @@ export const convertDate = (date) => {
     return moment(date).format('MMM Do');
 }
 
+export const convertDateChart = (date) => {
+    moment.locale('ru');
+    return moment(date).format('Do MMM');
+}
+
 export const convertDobDate = (date) => {
     moment.locale('ru');
     return moment(date).format('Do MMMM YYYY');
+}
+
+export const convertSeatType = (seatType) =>
+    seatType === 'E' ? 'Эконом' : (seatType === 'B') ? 'Бизнес' : (seatType === 'F') ? 'Первый' : 'Неизвестен';
+
+export const convertDateToLocal = (date) => {
+    moment.locale('ru');
+    return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }

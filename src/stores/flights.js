@@ -36,7 +36,7 @@ export const useFlights = create(devtools(setState => ({
     fetchGetFlights: async () => {
         setState({errGetFlights: null});
         try {
-            const {data} = await yttAxios.get(`/flights/all`);
+            const {data} = await yttAxios.get(`/flights/valid`);
             setState({flights: data});
         }catch (e){
             setState({errGetFlights: parseError(e)});
@@ -66,8 +66,27 @@ export const useFlights = create(devtools(setState => ({
     fetchGetFlightById: async (flightId) => {
         setState({errGetFlights: null});
         try {
-            const {data} = await yttAxios.get(`/flights/${flightId}`);
+            const {data} = await yttAxios.get(`/flights/flight_by_id/${flightId}`);
             setState({currentFlight: data});
+        }catch (e){
+            setState({errGetFlights: parseError(e)});
+        }
+    },
+
+    fetchGetFlightByDate: async (flightDate) => {
+        setState({errGetFlights: null});
+        try {
+            const {data} = await yttAxios.get(`/flights/find_by_date?flightDate=${flightDate}`);
+            setState({flights: data});
+        }catch(e){
+            setState({errGetFlights: parseError(e)});
+        }
+    },
+    fetchGetValidWithTickets: async () => {
+        setState({errGetFlights: null});
+        try {
+            const {data} = await yttAxios.get(`/flights/valid_with_tickets`);
+            setState({flights: data});
         }catch (e){
             setState({errGetFlights: parseError(e)});
         }

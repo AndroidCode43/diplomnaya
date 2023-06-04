@@ -5,13 +5,12 @@ import { MdOutlineAirplaneTicket } from "react-icons/md";
 import {usePlanes} from "../../stores/plane";
 import {useEffect, useState} from "react";
 import {notification} from "antd";
-
-
-//УДАЛИТЬ REDUX И REACT-QUERY
+import {PlaneItem} from "../../components/PlaneItem/PlaneItem";
+import bg from "../../assets/svg_planet.svg";
 
 export const Planes = () => {
 
-    const {loading, error, msg, planes, fetchPlanes, fetchCreatePlane, fetchDeletePlanet} = usePlanes();
+    const {loading, error, msg, planes, fetchPlanes, fetchCreatePlane} = usePlanes();
 
     const [createPlane, setCreatePlane] = useState({
         name: '',
@@ -28,21 +27,21 @@ export const Planes = () => {
         fetchPlanes();
     },[])
 
-    const onSubmitBtn = async () => {
-        window.event.preventDefault()
-        fetchCreatePlane(createPlane);
-    }
+    useEffect(() => {
+        error != null && notification.error({message: 'Произошла ошибка!', description: error, duration: 5});
+    },[error]);
 
-    const deletePlaneBtn = (id) => {
-        fetchDeletePlanet(id);
+    useEffect(() => {
+        msg != null && notification.success({message: msg, duration: 2});
+    },[msg]);
+
+    const onSubmitBtn = async () => {
+        window.event.preventDefault();
+        fetchCreatePlane(createPlane);
     }
 
     if(loading){
         return <h1>Loading...</h1>
-    }
-
-    {
-        error != null && notification.error({message: 'Произошла ошибка!', description: error, duration: 2});
     }
 
     return <>
@@ -52,42 +51,18 @@ export const Planes = () => {
             <LayoutHeader>
                 <div className={styles.planes_items_container}>
 
+                    <img src={bg} className={styles.bg_img}/>
+
                     <div className={styles.planes_create_container}>
                         <h3 className={styles.title}>Самолёты</h3>
                         <p className={styles.desc}>Тут отображаются созданные самолёты.</p>
 
                         <div className={styles.planes_view_container}>
-                            {/* переделать в компонент юзер, а не самолёт */}
-                            {/* <ItemPlaneComponent/> */}
-
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Название</th>
-                                        <th>Вместимоть</th>
-                                        <th>Описание</th>
-                                        <th>Возможности</th>
-                                    </tr>
-                                </thead>
-
                                 {
-                                    planes.map((item) => {
-                                        return(
-                                            <tr>
-                                                <td className={styles.name_plane}>{item.name}</td>
-                                                <td>{item.numbOfSeats}</td>
-                                                <td className={styles.table_desc}>{item.description}</td>
-                                                <td className={styles.table_future_container}>
-                                                    <button onClick={() => deletePlaneBtn(item.id)}>Удаление</button>
-                                                    <button>Редактирование</button>
-                                                </td>
-                                            </tr>
-                                            )
+                                    planes?.map((item) => {
+                                        return <PlaneItem item={item}/>
                                     })
                                 }
-
-                            </table>
-
                         </div>
 
                     </div>
@@ -97,7 +72,7 @@ export const Planes = () => {
                         <p className={styles.desc}>В данном окне вы можете добавить новый самолёт в базу.</p>
 
                         <div className={styles.inputs_container}>
-                            <div className={styles.input}>
+                            <div className={styles.custom_input}>
                                 <p className={styles.title}>Название самолёта</p>
                                 <div>
                                     <MdOutlineAirplaneTicket className={styles.icon} />
@@ -105,15 +80,15 @@ export const Planes = () => {
                                 </div>
                             </div>
 
-                            <div className={styles.input}>
+                            <div className={styles.custom_input}>
                                 <p className={styles.title}>Описание самолёта</p>
                                 <div>
                                     <MdOutlineAirplaneTicket className={styles.icon} />
-                                    <input placeholder='Введите описание (не обязательно)' name='description' onChange={(e) => updateValues(e)}/>
+                                    <input placeholder='Введите описание' name='description' onChange={(e) => updateValues(e)}/>
                                 </div>
                             </div>
 
-                            <div className={styles.input}>
+                            <div className={styles.custom_input}>
                                 <p className={styles.title}>Кол-во кресел в самолёте</p>
                                 <div>
                                     <MdOutlineAirplaneTicket className={styles.icon} />
