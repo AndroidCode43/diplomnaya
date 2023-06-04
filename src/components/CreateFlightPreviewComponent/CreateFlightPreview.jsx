@@ -27,7 +27,6 @@ export const CreateFlightPreview = (props) => {
                 </div>
                 <div className={styles.create_flight_prev_sec_3}>
                     <p>{flightTime}</p>
-                    {/*<p className={styles.flight_h}>{arrivalTime} мин.</p>*/}
                     <p>{convertDateAndTime(flightDate, flightTime, arrivalTime)[1]}</p>
                 </div>
             </div>
@@ -36,12 +35,12 @@ export const CreateFlightPreview = (props) => {
                 <div className={styles.create_flight_preview_body_container}>
                     <div className={styles.create_flight_preview_body_one}>
                         <p>Рейс</p>
-                        <p>Классы</p>
+                        <p>Класс</p>
                         <p>Самолёт</p>
                     </div>
                     <div className={styles.create_flight_preview_body_two}>
                         <p>{nameFlight}</p>
-                        <p>Выбран: {selectClassTicket?.type}</p>
+                        <p>{selectClassTicket?.type}</p>
                         <p>{plane?.name}</p>
                     </div>
                 </div>
