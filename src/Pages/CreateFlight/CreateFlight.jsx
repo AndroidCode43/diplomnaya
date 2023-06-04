@@ -34,7 +34,7 @@ export const CreateFlight = () => {
     },[errUploading])
 
     useEffect(() => {
-        uploadingStatus && notification.success({message: 'Самолёт был успешно добавлен!'});
+        uploadingStatus && notification.success({message: 'Рейс был успешно добавлен!'});
     },[uploadingStatus]);
 
     const [values, setValues] = useState({

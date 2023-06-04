@@ -1,6 +1,7 @@
 import {create} from "zustand";
 import {devtools} from "zustand/middleware";
 import yttAxios from "../utils/axios_settings";
+import {parseError} from "../utils/utils";
 
 export const API_URL = 'http://localhost:5000'
 
@@ -30,7 +31,7 @@ export const usePlanes = create(devtools(setState => ({
             });
             setState({msg: 'Самолёт добавлен!'});
         }catch (e){
-            setState({error: JSON.parse(e.request.response).message.join(' ')});
+            setState({error: parseError(e)});
         }
     },
 
@@ -42,9 +43,7 @@ export const usePlanes = create(devtools(setState => ({
                     setState({planes: data, msg: 'Самолёт успешно удалён!'});
                 });
         }catch (e){
-            setState({error: e.error});
-        }finally {
-            setState({error: null, msg: null});
+            setState({error: parseError(e)});
         }
     }
 })));
