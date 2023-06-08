@@ -2,6 +2,7 @@ import {create} from "zustand";
 import {devtools} from "zustand/middleware";
 import {parseError} from "../utils/utils";
 import yttAxios from "../utils/axios_settings";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 export const useFlights = create(devtools(setState => ({
     flights:[],
@@ -82,12 +83,23 @@ export const useFlights = create(devtools(setState => ({
             setState({errGetFlights: parseError(e)});
         }
     },
+
     fetchGetValidWithTickets: async () => {
         setState({errGetFlights: null});
         try {
             const {data} = await yttAxios.get(`/flights/valid_with_tickets`);
             setState({flights: data});
         }catch (e){
+            setState({errGetFlights: parseError(e)});
+        }
+    },
+
+    fetchGetFlightByParams: async(date, fromCity, intoCity) => {
+        setState({errGetFlights: null});
+        try{
+            const {data} = await yttAxios.get(`/flights/valid_by_params?date=${date}&fromCity=${fromCity}&intoCity=${intoCity}`);
+            setState({flights: data});
+        }catch(e){
             setState({errGetFlights: parseError(e)});
         }
     }

@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import { NavLeft } from "../../components/NavLeft/NavLeft";
 import "./CreateFlight.scss";
 import { MdFlightTakeoff, MdFlightLand, MdChairAlt, MdOutlinePriceChange, MdOutlineTimelapse } from "react-icons/md";
 import { Navbar } from "../../components/Navbar/Navbar";
@@ -83,7 +82,6 @@ export const CreateFlight = () => {
     return (
         <>
             <div className="create_flight_container">
-                <NavLeft />
                 <div className="create_flight_content_container">
                     <Navbar />
                     <div className="create_flight_main_container">

@@ -1,5 +1,4 @@
 import { LayoutHeader } from '../../components/LayoutHeader/LayoutHeader';
-import { NavLeft } from '../../components/NavLeft/NavLeft';
 import styles from './Planes.module.scss';
 import { MdOutlineAirplaneTicket } from "react-icons/md";
 import {usePlanes} from "../../stores/plane";
@@ -46,8 +45,6 @@ export const Planes = () => {
 
     return <>
         <div className={styles.planes_container}>
-            <NavLeft />
-
             <LayoutHeader>
                 <div className={styles.planes_items_container}>
 

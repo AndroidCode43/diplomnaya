@@ -1,4 +1,3 @@
-import { NavLeft } from "../../components/NavLeft/NavLeft";
 import { IoCashOutline, IoCardOutline, IoCalendarOutline, IoLockClosedOutline } from "react-icons/io5";
 import "./CreateTicket.scss";
 import { SiS7Airlines } from "react-icons/si";
@@ -69,7 +68,6 @@ export const CreateTicket = () => {
 
     return (
         <div className="create_ticket_main_c">
-            <NavLeft/>
             <LayoutHeader>
                 <div className="create_ticket_container">
                     <img src={bg} className='bg_img'/>

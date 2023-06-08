@@ -1,0 +1,76 @@
+.search_container{
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    .item_left_container{
+        padding: 0.5rem;
+        border-top-left-radius: 0.7rem;
+        border-bottom-left-radius: 0.7rem;
+        min-width: 150px;  
+        box-shadow: 5px 5px 10px rgba(0,0,0, 0.2);
+        background: rgba(29, 99, 221, 0.3);
+        border-top: 1px solid #ffffff80;
+        border-right: 1px solid rgba(255, 255, 255, 0);
+        backdrop-filter: blur(3px); 
+        color: black;
+        font-weight: 600;
+
+        input{
+            background: transparent;
+            border: 0;
+            padding: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+
+    .item_container{
+        background: #007FFE;
+        padding: 0.5rem;
+        color: white;
+        min-width: 150px;
+        box-shadow: 5px 5px 5px rgba(0,0,0, 0.1);
+        background: rgba(29, 99, 221, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0);
+        border-right: 1px solid rgba(255, 255, 255, 0);
+        backdrop-filter: blur(3px); 
+        color: black;
+        font-weight: 600;
+
+        input{
+            background: transparent;
+            border: 0;
+            padding: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+
+    .item_right_container{
+        background: #007FFE;
+        padding: 0.5rem;
+        color: white;
+        border-top-right-radius: 0.7rem;
+        border-bottom-right-radius: 0.7rem;
+        min-width: 150px;
+        box-shadow: 5px 5px 10px rgba(0,0,0, 0.2);
+        background: rgba(29, 99, 221, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0);
+        border-right: 1px solid rgba(255, 255, 255, 0);
+        backdrop-filter: blur(3px); 
+        color: black;
+        font-weight: 600;
+
+        .search_button{
+            background: #007FFE;
+            color: white;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        }
+    }
+}

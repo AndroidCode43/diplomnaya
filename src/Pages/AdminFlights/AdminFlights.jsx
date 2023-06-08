@@ -1,5 +1,4 @@
 import styles from "./AdminFlights.module.scss";
-import {NavLeft} from "../../components/NavLeft/NavLeft";
 import {LayoutHeader} from "../../components/LayoutHeader/LayoutHeader";
 import {useFlights} from "../../stores/flights";
 import {useEffect, useState} from "react";
@@ -32,7 +31,6 @@ export const AdminFlights = () => {
     return(
             <>
                 <div className={styles.admin_flight_container}>
-                    <NavLeft/>
                     <LayoutHeader>
                         <div className={styles.admin_items_container}>
                             <img src={bg} className={styles.img_bg}/>
