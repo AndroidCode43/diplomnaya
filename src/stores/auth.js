@@ -7,6 +7,7 @@ import yttAxios from "../utils/axios_settings";
 export const useAuth = create(devtools(setState => ({
     authError: null,
     admin: null,
+    user: null,
     isLoggedIn: false,
 
     fetchAuthLogin: async (user) =>{
@@ -14,6 +15,10 @@ export const useAuth = create(devtools(setState => ({
         try {
             const { data } = await yttAxios.post(`/auth/login`, user);
             Cookies.set('token', data.token, {
+                expires: 7,
+                path: '/'
+            });
+            Cookies.set('role', data.role, {
                 expires: 7,
                 path: '/'
             });
@@ -26,12 +31,20 @@ export const useAuth = create(devtools(setState => ({
     fetchIsAdmin: async () => {
         setState({authError: null});
         try {
-            const {data} = await yttAxios.get(`/users/admin`);
+            const {data} = await yttAxios.get(`/users/admin`).then();
             setState({admin: data, authError: null});
-            console.log(data);
         }catch (e){
-            console.log(parseError(e));
             setState({authError: parseError(e), admin: null});
+        }
+    },
+
+    fetchAuthUser: async() => {
+        setState({authError: null});
+        try{
+            const { data } = await yttAxios.get(`/users/me`);
+            setState({user: data, authError: null});
+        }catch(e){
+            setState({authError: parseError(e), user: null});
         }
     }
 })));

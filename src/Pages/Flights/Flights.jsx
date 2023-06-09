@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import { FlightComponent } from "../../components/FlightComponent/FlightComponent";
 import styles from "./Flights.module.scss";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { Navbar } from "../../components/Navbar/Navbar";
 import {useFlights} from "../../stores/flights";
 import imgBg from "../../assets/svg_planet.svg";

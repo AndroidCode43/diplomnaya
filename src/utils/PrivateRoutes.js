@@ -1,15 +1,10 @@
-import {useAuth} from "../stores/auth";
-import {useEffect} from "react";
+import Cookies from "js-cookie";
 import {Navigate, Outlet} from "react-router-dom";
 
 const PrivateRoutes = () => {
-    const {fetchIsAdmin, authError} = useAuth();
-
-    useEffect(() => {
-        fetchIsAdmin();
-    },[]);
-
-    return authError == null ? <Outlet/> : <Navigate to={'/login'}/>;
+    const role = Cookies.get('role');
+    const token = Cookies.get('token');
+    return role === 'ADMIN' && token != undefined ? <Outlet/> : <Navigate to={'/login'}/>;
 }
 
 export default PrivateRoutes;

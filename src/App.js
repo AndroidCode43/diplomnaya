@@ -1,4 +1,3 @@
-import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CreateTicket } from './Pages/CreateTicket/CreateTicket';
 import { Main } from './Pages/Main/Main';
@@ -13,6 +12,8 @@ import {CurrentFlight} from "./Pages/CurrentFlight/CurrentFlight";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import {Dashboard} from "./Pages/Dashboard/Dashboard";
 import {Tickets} from "./Pages/Tickets/Tickets";
+import { AuthRoutes } from './utils/AuthRoutes';
+
 
 function App() {
   return (
@@ -22,8 +23,10 @@ function App() {
           <Route path='flights' element={<Flight />} />
           <Route path='auth/registration' element={<Registration/>}/>
           <Route path='login' element={<Login/>}/>
-          <Route path='account' element={<Account/>}/>
           <Route path='flight/:flightId' element={<CurrentFlight/>}/>
+          <Route element={<AuthRoutes/>}>
+              <Route path='account' element={<Account/>}/>
+          </Route>
           <Route element={<PrivateRoutes/>}>
               <Route path='admin/create_ticket' element={<CreateTicket />} />
               <Route path='admin/create_flight' element={<CreateFlight />} />
