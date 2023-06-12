@@ -43,7 +43,6 @@ export const AdminFlightComponent = (props) => {
                     </div>
                     <div className={styles.flight_comp_but_container}>
                         <button onClick={() => setIsViewTickets(!isViewTickets)}>Просмотреть билеты</button>
-                        <button>Посмотреть информацию</button>
                     </div>
                 </div>
 

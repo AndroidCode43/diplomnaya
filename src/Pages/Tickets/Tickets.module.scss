@@ -1,0 +1,60 @@
+.tikets_container{
+    position: relative;
+    
+    .flight_bg{
+        position: absolute;
+        z-index: -1;
+    }
+
+    .tickets_header{
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        h1{
+            font-weight: 600;
+        }
+    
+        p{
+            color: gray;
+            font-size: 1.1rem;
+        }
+    }
+
+    .result_tickets{
+        h3{
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filters_container{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .filter_container{
+                display: flex;
+                width: 100%;
+                gap: 1.5rem;
+            }
+        
+            p{
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .tickets_container_view{
+        margin-top: 1.5rem;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

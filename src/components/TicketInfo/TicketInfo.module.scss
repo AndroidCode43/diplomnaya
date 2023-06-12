@@ -7,7 +7,7 @@
   -moz-box-shadow: 9px 0px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 9px 0px 8px 0px rgba(34, 60, 80, 0.2);
   border-radius: 0.5rem;
-  width: 200px;
+  max-width: 200px;
 
   .create_ticket {
     padding: 1rem;
@@ -72,8 +72,8 @@
 }
 
 .create_ticket_center {
+  max-width: 200px;
   height: 25px;
-  margin: 0 auto;
   background-image: radial-gradient(circle, transparent 72%, aliceblue 72%),
   repeating-linear-gradient(90deg, aliceblue 0, aliceblue 2%, gray 2%, gray 4%),
   linear-gradient(aliceblue, aliceblue),
@@ -81,11 +81,10 @@
   background-position: -12px 0, 12px 50%, 12px 0, calc(100% + 12px) 0;
   background-repeat: no-repeat;
   background-size: 25px 25px, calc(100% - 25px) 1px, calc(100% - 24px) 100%, 25px 25px;
-
 }
 
 .create_ticket_barcode {
-  width: 100%;
+  max-width: 200px;
   border-radius: 0.5rem;
   align-items: center;
   background-color: aliceblue;

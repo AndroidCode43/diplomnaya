@@ -4,10 +4,19 @@ import {useFlights} from "../../stores/flights";
 import {useEffect, useState} from "react";
 import {AdminFlightComponent} from "../../components/AdminFlightComponent/AdminFlightComponent";
 import bg from "../../assets/svg_planet.svg";
+import {LoadingComponent} from "../../components/LoadingComponent/LoadingComponent";
+import {shallow} from "zustand/shallow";
 
 export const AdminFlights = () => {
 
-    const {fetchGetFlightsWithTickets, fetchGetFlightByDate, fetchGetValidWithTickets, flights} = useFlights();
+    const {fetchGetFlightsWithTickets, fetchGetFlightByDate, fetchGetValidWithTickets, flights, isLoading} = useFlights((state) => ({
+        fetchGetFlightsWithTickets: state.fetchGetFlightsWithTickets,
+        fetchGetFlightByDate: state.fetchGetFlightByDate,
+        fetchGetValidWithTickets: state.fetchGetValidWithTickets,
+        fetchGetValidWithTickets: state.fetchGetValidWithTickets,
+        flights: state.flights,
+        isLoading: state.isLoading
+    }), shallow);
 
     const [values, setValues] = useState({
         'flightDate': '',
@@ -56,6 +65,9 @@ export const AdminFlights = () => {
                             </div>
 
                             <div className={styles.admin_item_view_flight}>
+                                {
+                                    isLoading && <LoadingComponent/>
+                                }
                                 {
                                     flights?.map((flight) => {
                                         return <AdminFlightComponent item={flight} key={flight.id}/>

@@ -1,11 +1,12 @@
 import styles from "./TicketComponent.module.scss";
 import { IoAirplaneSharp } from "react-icons/io5";
-import {convertDate} from "../../utils/utils";
+import { convertDate } from "../../utils/utils";
+import Barcode from "react-barcode";
 
 export const TicketComponent = (props) => {
 
-    const {fromCity, intoCity, passengerName, flightDate, seatType,
-        nameFlight, flightTime} = props?.data;
+    const { fromCity, intoCity, passengerName, flightDate, seatType,
+        nameFlight, flightTime } = props?.data;
 
     return <>
         <div className={styles.create_ticket_gen_container}>
@@ -16,7 +17,7 @@ export const TicketComponent = (props) => {
                 <div className={styles.create_ticket_gen_cont}>
                     <div className={styles.create_ticket}>
                         <div className={styles.create_ticket_header}>
-                            <h1 className={styles.create_ticket_type}>Economy Saver</h1>
+                            <h1 className={styles.create_ticket_type}>ЯттАвиаline</h1>
                             <div className={styles.create_ticket_flight}>
                                 <h1>{fromCity}</h1>
                                 <IoAirplaneSharp size={15} className={styles.icon} />
@@ -47,7 +48,7 @@ export const TicketComponent = (props) => {
                         <div className={styles.create_ticket_item}>
                             <div className={styles.create_ticket_inform}>
                                 <h1 className={styles.title}>Класс</h1>
-                                <h1 className={styles.desc}>{seatType === 'F' && 'Первый' && seatType === 'B' && 'Бизнес' && seatType === 'E' && 'Эконом'}</h1>
+                                <h1 className={styles.desc}>{seatType}</h1>
                             </div>
                             <div className={styles.create_ticket_inform}>
                                 <h1 className={styles.title}>Место</h1>
@@ -58,7 +59,7 @@ export const TicketComponent = (props) => {
                 </div>
                 <div className={styles.create_ticket_center}></div>
                 <div className={styles.create_ticket_barcode}>
-                    <h1>BARCODE</h1>
+                    <Barcode value={`Ticket ${flightDate}`} background={'transparent'} width={1.2} height={30} fontSize={15} />
                 </div>
             </div>
         </div>

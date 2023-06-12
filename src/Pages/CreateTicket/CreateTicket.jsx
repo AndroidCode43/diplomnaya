@@ -8,14 +8,21 @@ import { TicketComponent } from "../../components/TicketComponent/TicketComponen
 import {useDebounce} from "../../hooks/debounce";
 import {useFlights} from "../../stores/flights";
 import {useTickets} from "../../stores/tickets";
-import {notification} from "antd";
+import {Button, notification} from "antd";
 import {LayoutHeader} from "../../components/LayoutHeader/LayoutHeader";
 import bg from "../../assets/svg_planet.svg";
+import { convertSeatTypeToMoney } from "../../utils/utils";
 
 export const CreateTicket = () => {
 
     const {flights, errGetFlights, fetchGetFlightByCity} = useFlights();
-    const {errCreateTicket, fetchCreateTicket, clearError} = useTickets();
+    
+    const {errCreateTicket, fetchCreateTicket, clearError, isLoading} = useTickets((state) => ({
+        errCreateTicket: state.errCreateTicket,
+        fetchCreateTicket: state.fetchCreateTicket,
+        clearError: state.clearError,
+        isLoading: state.isLoading
+    }));
 
     const [isDrop, setIsDrop] = useState(false);
     const [selectFlight, setSelectFlight] = useState(null);
@@ -55,7 +62,6 @@ export const CreateTicket = () => {
         setSearchValues({ ...searchValues, [e.target.name]: e.target.value });
     }
 
-    //после выбора рейса, рейс сохраняется в state, делаем isDrop = false, что-бы отключить отображение найденных рейсов
     const selectFlightClick = (flight) => {
         setSelectFlight(flight);
         setIsDrop(false);
@@ -99,17 +105,17 @@ export const CreateTicket = () => {
 
                                             <div className="dropdown_container">
                                                 <div className="custom_input">
-                                                    <p className="title">Страна вылета</p>
+                                                    <p className="title">Место вылета</p>
                                                     <div className="input_border">
                                                         <MdSearch />
-                                                        <input placeholder="Страна вылета" name='fromCity' maxLength={50} onChange={(e) => updateSearch(e)} />
+                                                        <input placeholder="Место вылета" name='fromCity' maxLength={50} onChange={(e) => updateSearch(e)} />
                                                     </div>
                                                 </div>
                                                 <div className="custom_input">
-                                                    <p className="title">Страна прилёта</p>
+                                                    <p className="title">Место прилёта</p>
                                                     <div className="input_border">
                                                         <MdSearch />
-                                                        <input placeholder="Страна прилёта" name='intoCity' value={selectFlight?.intoCity} maxLength={50} onChange={(e) => updateSearch(e)} />
+                                                        <input placeholder="Место прилёта" name='intoCity' value={selectFlight?.intoCity} maxLength={50} onChange={(e) => updateSearch(e)} />
                                                     </div>
                                                 </div>
                                                 {
@@ -164,7 +170,7 @@ export const CreateTicket = () => {
 
                                             <div className="select_payment_total_container">
                                                 <p className="total">Итог:</p>
-                                                <p className="total">{}р</p>
+                                                <p className="total">{convertSeatTypeToMoney(selectFlight, values.seatType)}₽</p>
                                             </div>
 
                                             {
@@ -199,7 +205,7 @@ export const CreateTicket = () => {
                                             }
                                         </div>
 
-                                        <button className="create_ticket_button" onClick={() => createTicketClick()}>Оформить билет</button>
+                                        <Button className="create_ticket_button" loading={isLoading} onClick={() => createTicketClick()}>Оформить билет</Button>
                                     </div>
                                 </div>
                             </div>

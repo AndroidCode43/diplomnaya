@@ -5,9 +5,10 @@ import yttAxios from "../utils/axios_settings";
 
 export const useTickets = create(devtools(setState => ({
     errCreateTicket: null,
-    selectClassTicket:null,
+    selectClassTicket: null,
     tickets: null,
     selectTickets: null,
+    isLoading: false,
 
     clearError: () => setState({errCreateTicket:null}),
 
@@ -21,11 +22,12 @@ export const useTickets = create(devtools(setState => ({
     },
 
     fetchCreateTicket: async (ticket, flightId) => {
-        setState({errCreateTicket: null});
+        setState({errCreateTicket: null, isLoading: true});
         try {
             await yttAxios.post(`/tickets/create_ticket/${flightId}`, ticket);
+            setState({isLoading: false});
         }catch (e){
-            setState({errCreateTicket: parseError(e)});
+            setState({errCreateTicket: parseError(e), isLoading: false});
         }
     },
 
@@ -39,10 +41,10 @@ export const useTickets = create(devtools(setState => ({
     },
 
     fetchGetAllTickets: async () => {
-        setState({errCreateTicket: null});
+        setState({errCreateTicket: null, isLoading: true});
         try {
             const {data} = await yttAxios.get('/tickets/all');
-            setState({tickets: data});
+            setState({tickets: data, isLoading: false});
         }catch(e){
             setState({errCreateTicket: parseError(e)});
         }
@@ -55,6 +57,16 @@ export const useTickets = create(devtools(setState => ({
             setState({selectTickets: data});
         }catch(e){
             setState({errCreateTicket: parseError(e)});
+        }
+    },
+
+    fetchGetTicketsByParams: async(userName, flightName, flightDate) => {
+        setState({isLoading: true});
+        try {
+            const {data} = await yttAxios.get(`/tickets/by_params?userName=${userName}&flightName=${flightName}&flightDate=${flightDate}`);
+            setState({tickets: data, isLoading: false});
+        } catch (error) {
+            
         }
     }
 

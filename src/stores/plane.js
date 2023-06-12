@@ -5,11 +5,12 @@ import {parseError} from "../utils/utils";
 
 export const API_URL = 'http://localhost:5000'
 
-//ХРАНИЛИЩЕ СОСТОЯНИЯ ДЛЯ САМОЛЁТОВ
+
 export const usePlanes = create(devtools(setState => ({
     planes: [],
     error: null,
     msg: null,
+    isLoading: false,
 
     fetchPlanes: async () => {
         setState({isLoading: false});
@@ -24,26 +25,15 @@ export const usePlanes = create(devtools(setState => ({
     },
 
     fetchCreatePlane: async (plane) => {
+        setState({isLoading: true});
         try {
             await yttAxios.post(`/planes`, plane).then(async () => {
                 const {data} = await yttAxios.get('/planes/all');
-                setState({planes: data});
+                setState({planes: data, isLoading: false});
             });
             setState({msg: 'Самолёт добавлен!'});
         }catch (e){
-            setState({error: parseError(e)});
-        }
-    },
-
-    fetchDeletePlanet: async (id) => {
-        try {
-            await yttAxios.delete(`/planes/delete/${id}`)
-                .then(async() => {
-                    const {data} = await yttAxios.get(`/planes/all`);
-                    setState({planes: data, msg: 'Самолёт успешно удалён!'});
-                });
-        }catch (e){
-            setState({error: parseError(e)});
+            setState({error: parseError(e), isLoading: false});
         }
     }
 })));

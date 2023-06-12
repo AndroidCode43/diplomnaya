@@ -39,3 +39,7 @@ export const convertDateToLocal = (date) => {
     moment.locale('ru');
     return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }
+
+export const convertSeatTypeToMoney = (flightData, seatType) => 
+flightData != null ?
+seatType === 'F' ? flightData.pricePremium : seatType === 'E' ? flightData.priceEconomy : seatType === 'B' ? flightData.priceBusiness : null : '';

@@ -38,10 +38,11 @@
             background-color: #1D63DC;
             color: white;
             width: 100%;
+            height: fit-content;
             margin-top: 2rem;
             font-size: 1rem;
             border-radius: 0.5rem;
-            padding: 0.7rem 1rem;
+            padding: 0.5rem;
             @extend %c_shadow;
         }
     }

@@ -3,13 +3,21 @@ import styles from './Planes.module.scss';
 import { MdOutlineAirplaneTicket } from "react-icons/md";
 import {usePlanes} from "../../stores/plane";
 import {useEffect, useState} from "react";
-import {notification} from "antd";
+import {Button, notification} from "antd";
 import {PlaneItem} from "../../components/PlaneItem/PlaneItem";
 import bg from "../../assets/svg_planet.svg";
+import {shallow} from "zustand/shallow";
 
 export const Planes = () => {
 
-    const {loading, error, msg, planes, fetchPlanes, fetchCreatePlane} = usePlanes();
+    const {isLoading, error, msg, planes, fetchPlanes, fetchCreatePlane} = usePlanes((state) => ({
+        isLoading: state.isLoading,
+        error: state.error,
+        msg: state.msg,
+        planes: state.planes,
+        fetchPlanes: state.fetchPlanes,
+        fetchCreatePlane: state.fetchCreatePlane
+    }), shallow);
 
     const [createPlane, setCreatePlane] = useState({
         name: '',
@@ -39,10 +47,6 @@ export const Planes = () => {
         fetchCreatePlane(createPlane);
     }
 
-    if(loading){
-        return <h1>Loading...</h1>
-    }
-
     return <>
         <div className={styles.planes_container}>
             <LayoutHeader>
@@ -57,7 +61,7 @@ export const Planes = () => {
                         <div className={styles.planes_view_container}>
                                 {
                                     planes?.map((item) => {
-                                        return <PlaneItem item={item}/>
+                                        return <PlaneItem item={item} key={item.id}/>
                                     })
                                 }
                         </div>
@@ -94,7 +98,7 @@ export const Planes = () => {
                             </div>
                         </div>
 
-                        <button className={styles.btn_add}>Добавить самолёт</button>
+                        <Button className={styles.btn_add} loading={isLoading} onClick={() => fetchCreatePlane(createPlane)}>Добавить самолёт</Button>
                     </form>
 
                 </div>
