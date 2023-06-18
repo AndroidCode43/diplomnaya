@@ -40,6 +40,11 @@ export const convertDateToLocal = (date) => {
     return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }
 
+export const convertDateY = (e) => {
+    moment.locale('ru');
+    return moment(e.$d).format('YYYY-MM-DD');
+}
+
 export const convertSeatTypeToMoney = (flightData, seatType) => 
 flightData != null ?
 seatType === 'F' ? flightData.pricePremium : seatType === 'E' ? flightData.priceEconomy : seatType === 'B' ? flightData.priceBusiness : null : '';

@@ -1,7 +1,6 @@
 @import "../../scss/styles.scss";
 
 .flight_container {
-    height: 100vh;
 
     .flight_main_container {
         margin-top: 2rem;
@@ -10,11 +9,6 @@
         margin-left: auto;
         margin-right: auto;
         position: relative;
-
-        .flight_bg{
-            position: absolute;
-            z-index: -1;
-        }
     }
 
 

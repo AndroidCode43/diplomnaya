@@ -57,9 +57,6 @@ export const Account = () => {
         <div className={styles.account_container}>
             <LayoutHeader>
                 <div className={styles.items_container}>
-
-                    <img src={bg} className={styles.bg_img}/>
-
                     <div>
                         <h1 className={styles.main_title}>Ваш аккаунт</h1>
                         <p className={styles.desc}>Ваш аккаунт полностью готов к работе, вы можете смело заказывать билеты!</p>

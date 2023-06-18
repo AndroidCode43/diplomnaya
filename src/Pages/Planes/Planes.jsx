@@ -52,8 +52,6 @@ export const Planes = () => {
             <LayoutHeader>
                 <div className={styles.planes_items_container}>
 
-                    <img src={bg} className={styles.bg_img}/>
-
                     <div className={styles.planes_create_container}>
                         <h3 className={styles.title}>Самолёты</h3>
                         <p className={styles.desc}>Тут отображаются созданные самолёты.</p>

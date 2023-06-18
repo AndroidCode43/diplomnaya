@@ -13,6 +13,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import {Dashboard} from "./Pages/Dashboard/Dashboard";
 import {Tickets} from "./Pages/Tickets/Tickets";
 import { AuthRoutes } from './utils/AuthRoutes';
+import { People } from './Pages/People/Peope';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='flights' element={<Flight />} />
           <Route path='auth/registration' element={<Registration/>}/>
           <Route path='login' element={<Login/>}/>
+          <Route path='registration' element={<Registration/>}/>
           <Route path='flight/:flightId' element={<CurrentFlight/>}/>
           <Route element={<AuthRoutes/>}>
               <Route path='account' element={<Account/>}/>
@@ -34,6 +36,7 @@ function App() {
               <Route path='admin/planes' element={<Planes/>} />
               <Route path='admin/dashboard' element={<Dashboard/>} />
               <Route path='admin/tickets' element={<Tickets/>} />
+              <Route path='admin/users' element={<People/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

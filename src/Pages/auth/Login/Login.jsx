@@ -1,15 +1,18 @@
 import {LayoutHeader} from "../../../components/LayoutHeader/LayoutHeader";
 import styles from "./Login.module.scss";
-import authIcon from "../../../assets/auth_icon.png";
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../../../stores/auth";
 import {notification} from "antd";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 
 export const Login = () => {
     const navigate = useNavigate();
 
-    const {fetchAuthLogin, authError, isLoggedIn} = useAuth();
+    const {fetchAuthLogin, authError, isLoggedIn, clearError} = useAuth();
+
+    useEffect(() => {
+        clearError();
+    },[]);
 
     useEffect(() => {
         authError != null && notification.error({message: 'Ошибка!', description: authError, duration: 5});
@@ -43,7 +46,7 @@ export const Login = () => {
 
                         <div className={styles.login_hello_container}>
                             <h1 className={styles.title}>Вход в аккаунт</h1>
-                            <p className={styles.desc}>Для входа в личный аккаунт необходимо ввести логи и пароль в ниже указанных полях.</p>
+                            <p className={styles.desc}>Для входа в личный кабинет необходимо ввести логи и пароль в ниже указанных полях.</p>
                         </div>
 
                         <div className={styles.custom_input}>
@@ -62,14 +65,11 @@ export const Login = () => {
 
                         <div>
                             <button>Войти</button>
-                            <p className={styles.desc_create_acc}>Ещё не завели аккаунт? <span>Создайте его</span></p>
+                            <p className={styles.desc_create_acc}>Ещё не завели аккаунт? <span onClick={() => Navigate('/registration')}>Создайте его</span></p>
                         </div>
                     </form>
                 </div>
 
-                <div className={styles.icon_container}>
-                    <img src={authIcon}/>
-                </div>
             </div>
         </LayoutHeader>
     </>

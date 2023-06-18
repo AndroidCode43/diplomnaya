@@ -44,9 +44,7 @@ export const Tickets = () => {
     return <>
         <LayoutHeader>
             <div className={styles.tikets_container}>
-
-                <img src={imgBg} className={styles.flight_bg}/>
-
+                
                 <div className={styles.tickets_header}>
                     <h1>Оформленные билеты</h1>
                     <p>На данной странице доступен просмотр всех оформленных билетов!</p>

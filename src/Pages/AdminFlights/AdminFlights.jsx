@@ -42,7 +42,6 @@ export const AdminFlights = () => {
                 <div className={styles.admin_flight_container}>
                     <LayoutHeader>
                         <div className={styles.admin_items_container}>
-                            <img src={bg} className={styles.img_bg}/>
 
                             <div className={styles.admin_items_info}>
                                 <h1>Отображение рейсов по фильтру</h1>

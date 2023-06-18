@@ -1,5 +1,4 @@
-
-.login_container{
+.login_container {
   margin-top: 2rem;
   display: flex;
   gap: 3rem;
@@ -10,41 +9,42 @@
     margin-right: 1rem;
   }
 
-  .login_auth_container{
+  .login_auth_container {
     max-width: 40%;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
     height: 100%;
 
     @media (max-width: 700px) {
       max-width: 100%;
     }
 
-    .auth_container{
+    .auth_container {
       padding: 1rem 2rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
-      border-radius: 0.5rem;
-      box-shadow: 1px 6px 9px -1px rgba(34, 60, 80, 0.2);
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
 
-      .login_hello_container{
-        margin-bottom:  1.5rem;
+      .login_hello_container {
+        margin-bottom: 1.5rem;
 
-        .title{
+        .title {
           font-weight: 600;
           text-align: center;
           font-size: 1.5rem;
           width: 100%;
         }
 
-        .desc{
+        .desc {
           margin-top: 0.5rem;
-          color: #b4b4b4;
+          color: gray;
           font-weight: 400;
 
-          @media (max-width: 700px){
-            color: white;
+          @media (max-width: 700px) {
+            color: gray;
             text-align: center;
           }
         }
@@ -79,7 +79,7 @@
         }
       }
 
-      button{
+      button {
         margin-top: 1.5rem;
         background: #007FFE;
         width: 100%;
@@ -93,25 +93,26 @@
         box-shadow: 4px 4px 8px -2px rgba(34, 60, 80, 0.2);
       }
 
-      .desc_create_acc{
+      .desc_create_acc {
         font-weight: 600;
         margin-top: 0.5rem;
 
-        span{
+        span {
           color: #007FFE;
+          cursor: pointer;
         }
       }
     }
   }
 
-  .icon_container{
+  .icon_container {
 
     @media (max-width: 700px) {
       position: absolute;
       z-index: -1;
     }
 
-    img{
+    img {
       border-radius: 1rem;
     }
   }

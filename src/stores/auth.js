@@ -10,10 +10,30 @@ export const useAuth = create(devtools(setState => ({
     user: null,
     isLoggedIn: false,
 
+    clearError: () => setState({authError: null}),
+
     fetchAuthLogin: async (user) =>{
         setState({authError: null});
         try {
             const { data } = await yttAxios.post(`/auth/login`, user);
+            Cookies.set('token', data.token, {
+                expires: 7,
+                path: '/'
+            });
+            Cookies.set('role', data.role, {
+                expires: 7,
+                path: '/'
+            });
+            setState({isLoggedIn: true});
+        }catch (e){
+            setState({authData: null, authError: parseError(e)});
+        }
+    },
+
+    fetchRegister: async (user) =>{
+        setState({authError: null});
+        try {
+            const { data } = await yttAxios.post(`/auth/registration`, user);
             Cookies.set('token', data.token, {
                 expires: 7,
                 path: '/'

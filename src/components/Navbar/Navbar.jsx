@@ -28,7 +28,7 @@ export const Navbar = () => {
                                 <Link to={'/flights'} className={styles.item}>Рейсы</Link>
                                 {
                                     role === 'ADMIN' && <>
-                                        <Link className={styles.item}>Люди</Link>
+                                        <Link className={styles.item} to={'/admin/users'}>Люди</Link>
                                         <Link to={'/admin/tickets'} className={styles.item}>Билеты</Link>
                                         <Link to={'/admin/planes'} className={styles.item}>Самолёты</Link>
                                         <Link to={'/admin/dashboard'} className={styles.item}>Панель</Link>

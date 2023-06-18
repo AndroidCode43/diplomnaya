@@ -76,7 +76,6 @@ export const CreateTicket = () => {
         <div className="create_ticket_main_c">
             <LayoutHeader>
                 <div className="create_ticket_container">
-                    <img src={bg} className='bg_img'/>
                     <div className="create_ticket_cont">
                         <div className="create_ticket_add_container">
                             <div>

@@ -29,8 +29,6 @@ export const Dashboard = () => {
         <LayoutHeader>
             <div className={styles.dashboard_container}>
 
-                <img src={bg} alt={'plane'} className={styles.bg_img} />
-
                 <div className={styles.dashboard_title_container}>
                     <h1>Информационная панель</h1>
                     <div className={styles.divider} />

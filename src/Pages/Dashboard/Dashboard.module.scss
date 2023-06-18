@@ -1,11 +1,6 @@
 .dashboard_container{
   position: relative;
 
-  .bg_img{
-    position: absolute;
-    z-index: -1;
-  }
-
   .dashboard_title_container{
     display: flex;
     flex-direction: column;

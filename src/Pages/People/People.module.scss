@@ -1,5 +1,10 @@
-.tikets_container{
+.people_container{
     position: relative;
+
+    .flight_bg{
+        position: absolute;
+        z-index: -1;
+    }
 
     .tickets_header{
         margin: 1rem;
@@ -43,13 +48,13 @@
         }
     }
 
-    .tickets_container_view{
+    .users_container{
         margin-top: 1.5rem;
+        display: grid;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
-        gap: 2rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.5rem;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
