@@ -3,15 +3,23 @@ import styles from "./Login.module.scss";
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../../../stores/auth";
 import {notification} from "antd";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 export const Login = () => {
     const navigate = useNavigate();
 
     const {fetchAuthLogin, authError, isLoggedIn, clearError} = useAuth();
+    
+    const role = Cookies.get('role');
+    const token = Cookies.get('token');
 
     useEffect(() => {
         clearError();
+    
+        if(role && token){
+            navigate('/account');
+        }
     },[]);
 
     useEffect(() => {
@@ -19,7 +27,7 @@ export const Login = () => {
     },[authError]);
 
     useEffect(() => {
-        isLoggedIn && navigate('/account')
+        isLoggedIn && window.location.reload(true);
     }, [isLoggedIn]);
 
     const [value, setValue] = useState({
@@ -65,7 +73,7 @@ export const Login = () => {
 
                         <div>
                             <button>Войти</button>
-                            <p className={styles.desc_create_acc}>Ещё не завели аккаунт? <span onClick={() => Navigate('/registration')}>Создайте его</span></p>
+                            <p className={styles.desc_create_acc}>Ещё не завели аккаунт? <span onClick={() => navigate('/registration')}>Создайте его</span></p>
                         </div>
                     </form>
                 </div>

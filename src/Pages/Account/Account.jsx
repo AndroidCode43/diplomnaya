@@ -5,15 +5,16 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FaBirthdayCake, FaPassport, FaRubleSign } from "react-icons/fa";
 import {useAccount} from "../../stores/account";
 import {useEffect, useState} from "react";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {TicketInfo} from "../../components/TicketInfo/TicketInfo";
 import {IoCalendarOutline, IoCardOutline, IoLockClosedOutline} from "react-icons/io5";
 import {shallow} from "zustand/shallow";
 import {notification} from "antd";
 import {convertDobDate} from "../../utils/utils";
-import bg from "../../assets/svg_planet.svg";
 
 export const Account = () => {
+
+    const navigate = useNavigate();
 
     const {accountError, accountData, fetchGetMyAccount, fetchAddBalance,
         paymentError, paymentSuccess, clearState} = useAccount((state) => ({
@@ -39,10 +40,10 @@ export const Account = () => {
     useEffect(() => {
         clearState();
         fetchGetMyAccount();
-    },[])
+    },[]);
 
     useEffect(() => {
-        accountError != null && Navigate('/login');
+        // accountError != null && navigate('/login'); вывести ошибку
         }, [accountError]);
 
     useEffect(() => {

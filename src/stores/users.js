@@ -7,7 +7,7 @@ export const useUsers = create(devtools(setState => ({
     users: null,
     usersError: null,
     isLoading: false,
-
+    
     fetchGeAllUsers: async () => {
         setState({ usersError: null, isLoading: true });
         try {

@@ -3,11 +3,12 @@ import { LayoutHeader } from "../../../components/LayoutHeader/LayoutHeader";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../stores/auth";
 import { DatePicker, notification } from "antd";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { convertDateY } from "../../../utils/utils";
 
 export const Registration = () => {
 
+    const navigate = useNavigate();
     const { fetchRegister, authError, isLoggedIn, clearError } = useAuth();
 
     useEffect(() => {
@@ -96,7 +97,7 @@ export const Registration = () => {
 
                             <div>
                                 <button>Зарегистрироваться</button>
-                                <p className={styles.desc_create_acc}>Уже есть аккаунт? <span>Авторизоваться</span></p>
+                                <p className={styles.desc_create_acc}>Уже есть аккаунт? <span onClick={() => navigate('/login')}>Авторизоваться</span></p>
                             </div>
                         </form>
                     </div>
