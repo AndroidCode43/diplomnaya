@@ -3,7 +3,6 @@ import { IoAirplaneSharp } from "react-icons/io5";
 import Barcode from "react-barcode";
 import { convertDate, convertSeatType } from "../../utils/utils";
 import { Button } from "antd";
-import { type } from "@testing-library/user-event/dist/type";
 import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 
@@ -11,7 +10,7 @@ export const TicketInfo = (props) => {
 
     const componentRef = useRef();
 
-    const { passengerName, passengerPassport, seatType, seatNumber, id } = props.item;
+    const { passengerName, passengerPassport, seatType, seatNumber, id, price } = props.item;
     const { fromCity, intoCity, flightDate, nameFlight, flightTime } = props.item.flight;
 
     return <>
@@ -39,22 +38,30 @@ export const TicketInfo = (props) => {
                         </div>
                         <div className={styles.create_ticket_item}>
                             <div className={styles.create_ticket_inform}>
-                                <h1 className={styles.title}>Рейс</h1>
-                                <h1 className={styles.desc}>{nameFlight}</h1>
+                                <div className={styles.title}>Рейс</div>
+                                <div className={styles.desc}>{nameFlight}</div>
                             </div>
                             <div className={styles.create_ticket_inform}>
-                                <h1 className={styles.title}>Время</h1>
-                                <h1 className={styles.desc}>{flightTime}</h1>
+                                <div className={styles.title}>Время</div>
+                                <div className={styles.desc}>{flightTime}</div>
                             </div>
                         </div>
                         <div className={styles.create_ticket_item}>
                             <div className={styles.create_ticket_inform}>
-                                <h1 className={styles.title}>Класс</h1>
-                                <h1 className={styles.desc}>{convertSeatType(seatType)}</h1>
+                                <div className={styles.title}>Класс</div>
+                                <div className={styles.desc}>{convertSeatType(seatType)}</div>
                             </div>
                             <div className={styles.create_ticket_inform}>
-                                <h1 className={styles.title}>Место</h1>
-                                <h1 className={styles.desc}>{seatNumber + seatType}</h1>
+                                <div className={styles.title}>Место</div>
+                                <div className={styles.desc}>{seatNumber + seatType}</div>
+                            </div>
+                        </div>
+                        <div className={styles.create_ticket_item}>
+                            <div className={styles.create_ticket_inform}>
+                                <div className={styles.title}>Цена</div>
+                            </div>
+                            <div className={styles.create_ticket_inform}>
+                                <div className={styles.desc}>{price}₽</div>
                             </div>
                         </div>
                     </div>

@@ -2,22 +2,17 @@ import {create} from "zustand";
 import {devtools} from "zustand/middleware";
 import {parseError} from "../utils/utils";
 import yttAxios from "../utils/axios_settings";
+import { notification } from "antd";
 
 export const useAccount = create(devtools(setState => ({
     accountData: null,
-    accountError: null,
-    paymentError: null,
-    paymentSuccess: null,
-
-    clearState: () => setState({paymentError: null, paymentSuccess: null}),
 
     fetchGetMyAccount: async () => {
-        setState({accountError: null});
         try {
             const {data} = await yttAxios.get(`/users/me`);
             setState({accountData: data});
         }catch (e){
-            setState({accountError: parseError(e)});
+            notification.error({message: 'Произошла ошибка!', description: parseError(e), duration: 5});
         }
     },
 
@@ -29,9 +24,9 @@ export const useAccount = create(devtools(setState => ({
                    const {data} = await yttAxios.get(`/users/me`);
                    setState({accountData: data});
                });
-           setState({paymentSuccess: 'Оплата прошла успешно!'});
+               notification.success({message: 'Оплата прошла успешно!', duration: 2});
         }catch (e){
-            setState({paymentError: parseError(e)});
+            notification.error({message: 'Ошибка при оплате!', description: parseError(e), duration: 5});
         }
     }
 })));

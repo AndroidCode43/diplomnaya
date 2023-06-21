@@ -8,16 +8,15 @@ import { LoadingComponent } from "../../components/LoadingComponent/LoadingCompo
 import { DatePicker, Input } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 import { MdFlightTakeoff } from "react-icons/md";
-import imgBg from "../../assets/svg_planet.svg";
 import { useDebounce } from "../../hooks/debounce";
 
 export const Tickets = () => {
 
-    const { fetchGetAllTickets, fetchGetTicketsByParams, isLoading, tickets } = useTickets((state) => ({
+    const { fetchGetAllTickets, fetchGetTicketsByParams, isLoading, tickets, clearError } = useTickets((state) => ({
         fetchGetAllTickets: state.fetchGetAllTickets,
         isLoading: state.isLoading,
         tickets: state.tickets,
-        fetchGetTicketsByParams: state.fetchGetTicketsByParams
+        fetchGetTicketsByParams: state.fetchGetTicketsByParams,
     }), shallow);
 
     useEffect(() => {

@@ -14,10 +14,8 @@ import {convertDobDate} from "../../utils/utils";
 
 export const Account = () => {
 
-    const navigate = useNavigate();
-
     const {accountError, accountData, fetchGetMyAccount, fetchAddBalance,
-        paymentError, paymentSuccess, clearState} = useAccount((state) => ({
+        paymentError, paymentSuccess, clearError} = useAccount((state) => ({
         accountError: state.accountError,
         paymentError: state.paymentError,
         paymentSuccess: state.paymentSuccess,
@@ -25,7 +23,7 @@ export const Account = () => {
         accountData: state.accountData,
         fetchGetMyAccount: state.fetchGetMyAccount,
         fetchAddBalance: state.fetchAddBalance,
-        clearState: state.clearState
+        clearError: state.clearError
     }), shallow);
 
     const [values, setValues] = useState({
@@ -38,21 +36,8 @@ export const Account = () => {
     const updateValues = (e) => setValues({...values, [e.target.name]: e.target.value});
 
     useEffect(() => {
-        clearState();
         fetchGetMyAccount();
     },[]);
-
-    useEffect(() => {
-        // accountError != null && navigate('/login'); вывести ошибку
-        }, [accountError]);
-
-    useEffect(() => {
-        paymentError != null && notification.error({message: 'Ошибка при оплате!', description: paymentError, duration: 5});
-    },[paymentError]);
-
-    useEffect(() => {
-        paymentSuccess != null && notification.success({message: paymentSuccess, duration: 2});
-    },[paymentSuccess]);
 
     return <>
         <div className={styles.account_container}>
@@ -136,7 +121,7 @@ export const Account = () => {
                                         <p className={styles.title}>Номер карты</p>
                                         <div>
                                             <IoCardOutline />
-                                            <input placeholder="0000 0000 0000" maxLength={10} name='cardNumber' onChange={(e) => updateValues(e)}/>
+                                            <input placeholder="0000 0000 0000" maxLength={12} name='cardNumber' onChange={(e) => updateValues(e)}/>
                                         </div>
                                     </div>
 
@@ -145,14 +130,14 @@ export const Account = () => {
                                             <p className={styles.title}>Дата</p>
                                             <div className={styles.input_border}>
                                                 <IoCalendarOutline />
-                                                <input placeholder="00/00" maxLength={10} name='date' onChange={(e) => updateValues(e)}/>
+                                                <input placeholder="00/00" maxLength={5} name='date' onChange={(e) => updateValues(e)}/>
                                             </div>
                                         </div>
                                         <div className={styles.custom_input}>
                                             <p className={styles.title}>Код</p>
                                             <div className={styles.input_border}>
                                                 <IoLockClosedOutline />
-                                                <input placeholder="000" maxLength={10} name='cvv' onChange={(e) => updateValues(e)}/>
+                                                <input placeholder="000" maxLength={3} name='cvv' onChange={(e) => updateValues(e)}/>
                                             </div>
                                         </div>
                                     </div>

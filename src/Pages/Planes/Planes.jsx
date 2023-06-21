@@ -3,14 +3,13 @@ import styles from './Planes.module.scss';
 import { MdOutlineAirplaneTicket } from "react-icons/md";
 import {usePlanes} from "../../stores/plane";
 import {useEffect, useState} from "react";
-import {Button, notification} from "antd";
+import {Button} from "antd";
 import {PlaneItem} from "../../components/PlaneItem/PlaneItem";
-import bg from "../../assets/svg_planet.svg";
 import {shallow} from "zustand/shallow";
 
 export const Planes = () => {
 
-    const {isLoading, error, msg, planes, fetchPlanes, fetchCreatePlane} = usePlanes((state) => ({
+    const {isLoading, planes, fetchPlanes, fetchCreatePlane} = usePlanes((state) => ({
         isLoading: state.isLoading,
         error: state.error,
         msg: state.msg,
@@ -32,15 +31,7 @@ export const Planes = () => {
 
     useEffect(() => {
         fetchPlanes();
-    },[])
-
-    useEffect(() => {
-        error != null && notification.error({message: 'Произошла ошибка!', description: error, duration: 5});
-    },[error]);
-
-    useEffect(() => {
-        msg != null && notification.success({message: msg, duration: 2});
-    },[msg]);
+    },[]);
 
     const onSubmitBtn = async () => {
         window.event.preventDefault();

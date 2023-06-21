@@ -2,15 +2,13 @@ import {create} from "zustand";
 import {devtools} from "zustand/middleware";
 import {parseError} from "../utils/utils";
 import yttAxios from "../utils/axios_settings";
+import { notification } from "antd";
 
 export const useTickets = create(devtools(setState => ({
-    errCreateTicket: null,
     selectClassTicket: null,
     tickets: null,
     selectTickets: null,
     isLoading: false,
-
-    clearError: () => setState({errCreateTicket:null}),
 
     setClassTicket: (classTicket, price) => {
         setState({
@@ -27,36 +25,38 @@ export const useTickets = create(devtools(setState => ({
             await yttAxios.post(`/tickets/create_ticket/${flightId}`, ticket);
             setState({isLoading: false});
         }catch (e){
-            setState({errCreateTicket: parseError(e), isLoading: false});
+            setState({isLoading: false});
+            notification.error({message: 'Ошибка при создании билета!', description: parseError(e), duration: 5});
         }
     },
 
     fetchBuyTicket: async (seatType, flightId) => {
-        setState({errCreateTicket: null});
+        setState({isLoading: true});
         try {
             await yttAxios.post(`/tickets/buy_ticket?seatType=${seatType}&flightId=${flightId}`);
+            setState({isLoading: false});
         }catch (e){
-            setState({errCreateTicket: parseError(e)});
+            setState({isLoading: false});
+            notification.error({message: 'Ошибка при оплате!', description: parseError(e), duration: 5});
         }
     },
 
     fetchGetAllTickets: async () => {
-        setState({errCreateTicket: null, isLoading: true});
+        setState({isLoading: true});
         try {
             const {data} = await yttAxios.get('/tickets/all');
             setState({tickets: data, isLoading: false});
         }catch(e){
-            setState({errCreateTicket: parseError(e)});
+            notification.error({message: 'Не удалось получить список билетов!', description: parseError(e), duration: 5});
         }
     },
 
     fetchGetTodayTickets: async () => {
-        setState({errCreateTicket: null});
         try {
             const {data} = await yttAxios.get('/tickets/today');
             setState({selectTickets: data});
         }catch(e){
-            setState({errCreateTicket: parseError(e)});
+            notification.error({message: 'Не удалось получить список билетов!', description: parseError(e), duration: 5});
         }
     },
 

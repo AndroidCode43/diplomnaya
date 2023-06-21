@@ -1,7 +1,7 @@
 import styles from "./CurrentFlight.module.scss";
 import { LayoutHeader } from "../../components/LayoutHeader/LayoutHeader";
 import { CreateFlightPreview } from "../../components/CreateFlightPreviewComponent/CreateFlightPreview";
-import { ConfigProvider, notification, Timeline } from "antd";
+import { Button, ConfigProvider, notification, Timeline } from "antd";
 import { EconomyComponent } from "../../components/EconomyComponent/EconomyComponent";
 import { PremiumComponent } from "../../components/PremiumComponent/PremiumComponent";
 import { FirstComponent } from "../../components/FirstComponent/FirstComponent";
@@ -11,20 +11,25 @@ import { useParams } from "react-router-dom";
 import { convertDateAndTime } from "../../utils/utils";
 import { useTickets } from "../../stores/tickets";
 import { LoadingComponent } from "../../components/LoadingComponent/LoadingComponent";
+import { shallow } from "zustand/shallow";
 
 export const CurrentFlight = () => {
 
     const { flightId } = useParams();
-    const { currentFlight, fetchGetFlightById } = useFlights();
-    const { selectClassTicket, fetchBuyTicket, errCreateTicket } = useTickets();
+    const { currentFlight, fetchGetFlightById } = useFlights((state) => ({
+        currentFlight: state.currentFlight,
+        fetchGetFlightById: state.fetchGetFlightById,
+    }), shallow);
+    
+    const { selectClassTicket, fetchBuyTicket, isLoading } = useTickets((state) => ({
+        selectClassTicket: state.selectClassTicket,
+        fetchBuyTicket: state.fetchBuyTicket,
+        isLoading: state.isLoading
+    }), shallow);
 
     useEffect(() => {
         fetchGetFlightById(flightId);
     }, []);
-
-    useEffect(() => {
-        errCreateTicket != null && notification.error({ message: 'Ошибка!', description: errCreateTicket, duration: 5 });
-    }, [errCreateTicket]);
 
     if (currentFlight == null) {
         return <div style={{width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -85,7 +90,7 @@ export const CurrentFlight = () => {
                     <EconomyComponent price={priceEconomy} />
                     <PremiumComponent price={priceBusiness} />
                     <FirstComponent price={pricePremium} />
-                    <button className={styles.buy_ticket_btn} onClick={() => clickBuyTicketBtn()}>Купить билет за {selectClassTicket?.price}₽</button>
+                    <Button className={styles.buy_ticket_btn} loading={isLoading} onClick={() => clickBuyTicketBtn()}>Купить билет за {selectClassTicket?.price}₽</Button>
                 </div>
             </div>
         </LayoutHeader>

@@ -2,25 +2,22 @@ import {create} from "zustand";
 import {devtools} from "zustand/middleware";
 import yttAxios from "../utils/axios_settings";
 import {parseError} from "../utils/utils";
+import { notification } from "antd";
 
 export const API_URL = 'http://localhost:5000'
 
 
 export const usePlanes = create(devtools(setState => ({
     planes: [],
-    error: null,
-    msg: null,
     isLoading: false,
 
     fetchPlanes: async () => {
         setState({isLoading: false});
         try {
             const {data} = await yttAxios.get('/planes/all');
-            setState({planes: data, error: null});
+            setState({planes: data});
         }catch (e){
-            setState({error: e.error});
-        }finally {
-            setState({error: null});
+            notification.error({message: 'Не удалось получить список самолётов!', description: parseError(e), duration: 5});
         }
     },
 
@@ -31,7 +28,7 @@ export const usePlanes = create(devtools(setState => ({
                 const {data} = await yttAxios.get('/planes/all');
                 setState({planes: data, isLoading: false});
             });
-            setState({msg: 'Самолёт добавлен!'});
+            notification.success({message: 'Самолёт успешно добавлен!', duration: 5});
         }catch (e){
             setState({error: parseError(e), isLoading: false});
         }

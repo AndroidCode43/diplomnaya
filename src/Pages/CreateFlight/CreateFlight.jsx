@@ -1,41 +1,27 @@
 import { useEffect, useState } from "react";
 import "./CreateFlight.scss";
 import { MdFlightTakeoff, MdFlightLand, MdChairAlt, MdOutlinePriceChange, MdOutlineTimelapse } from "react-icons/md";
-import { Navbar } from "../../components/Navbar/Navbar";
-import { TimePicker } from "antd";
+import { Button, TimePicker } from "antd";
 import dayjs from "dayjs";
 import { notification } from "antd";
 import { useFlights } from "../../stores/flights";
 import { usePlanes } from "../../stores/plane";
 import { CreateFlightPreview } from "../../components/CreateFlightPreviewComponent/CreateFlightPreview";
 import { shallow } from "zustand/shallow";
-import bg from '../../assets/svg_planet.svg';
 import { LayoutHeader } from "../../components/LayoutHeader/LayoutHeader";
 
 export const CreateFlight = () => {
 
-    const { errUploading, fetchCreateFlight, uploadingStatus, clearError } = useFlights((state) => ({
-        errUploading: state.errUploading,
+    const { fetchCreateFlight, isUploading } = useFlights((state) => ({
         fetchCreateFlight: state.fetchCreateFlight,
-        uploadingStatus: state.uploadingStatus,
-        clearError: state.clearError
+        isUploading: state.isUploading
     }), shallow);
 
     const { planes, fetchPlanes } = usePlanes();
 
     useEffect(() => {
-        clearError();
         fetchPlanes();
-    }, [])
-
-    useEffect(() => {
-        errUploading != null
-            && notification.error({ message: 'Произошла ошибка!', description: errUploading, duration: 5 });
-    }, [errUploading])
-
-    useEffect(() => {
-        uploadingStatus && notification.success({ message: 'Рейс был успешно добавлен!' });
-    }, [uploadingStatus]);
+    }, []);
 
     const [values, setValues] = useState({
         nameFlight: 'Рейс',
@@ -78,7 +64,6 @@ export const CreateFlight = () => {
             return;
         }
         fetchCreateFlight(values, selectPlane.id);
-        //errUploading != null && notification.error({message: 'Произошла ошибка!', description: errUploading, duration: 5});
     }
 
     return (
@@ -223,7 +208,7 @@ export const CreateFlight = () => {
 
                                             </div>
                                         </div>
-                                        <button className="create_flight_save_btn" onClick={() => clickCreateFlight()}>Сохранить</button>
+                                        <Button className="create_flight_save_btn" loading={isUploading} onClick={() => clickCreateFlight()}>Сохранить</Button>
                                     </div>
                                 </div>
                             </div>

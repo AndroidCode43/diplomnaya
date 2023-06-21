@@ -10,17 +10,14 @@ import {useFlights} from "../../stores/flights";
 import {useTickets} from "../../stores/tickets";
 import {Button, notification} from "antd";
 import {LayoutHeader} from "../../components/LayoutHeader/LayoutHeader";
-import bg from "../../assets/svg_planet.svg";
 import { convertSeatTypeToMoney } from "../../utils/utils";
 
 export const CreateTicket = () => {
 
-    const {flights, errGetFlights, fetchGetFlightByCity} = useFlights();
+    const {flights, fetchGetFlightByCity} = useFlights();
     
-    const {errCreateTicket, fetchCreateTicket, clearError, isLoading} = useTickets((state) => ({
-        errCreateTicket: state.errCreateTicket,
+    const {fetchCreateTicket, isLoading} = useTickets((state) => ({
         fetchCreateTicket: state.fetchCreateTicket,
-        clearError: state.clearError,
         isLoading: state.isLoading
     }));
 
@@ -38,14 +35,6 @@ export const CreateTicket = () => {
     });
 
     const debounce = useDebounce(searchValues);
-
-    useEffect(() => {
-        clearError();
-    },[]);
-
-    useEffect(() => {
-        errCreateTicket != null && notification.error({message: 'Произошла ошибка!', description: errCreateTicket, duration: 5});
-    },[errCreateTicket]);
 
     useEffect(() => {
         fetchGetFlightByCity(debounce.fromCity, debounce.intoCity);
