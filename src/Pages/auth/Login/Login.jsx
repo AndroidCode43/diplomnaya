@@ -9,22 +9,16 @@ import Cookies from "js-cookie";
 export const Login = () => {
     const navigate = useNavigate();
 
-    const {fetchAuthLogin, authError, isLoggedIn, clearError} = useAuth();
+    const {fetchAuthLogin, isLoggedIn} = useAuth();
     
     const role = Cookies.get('role');
     const token = Cookies.get('token');
 
     useEffect(() => {
-        clearError();
-    
         if(role && token){
             navigate('/account');
         }
     },[]);
-
-    useEffect(() => {
-        authError != null && notification.error({message: 'Ошибка!', description: authError, duration: 5});
-    },[authError]);
 
     useEffect(() => {
         isLoggedIn && window.location.reload(true);

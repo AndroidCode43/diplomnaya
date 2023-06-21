@@ -2,22 +2,14 @@ import styles from "./Registration.module.scss";
 import { LayoutHeader } from "../../../components/LayoutHeader/LayoutHeader";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../stores/auth";
-import { DatePicker, notification } from "antd";
+import { DatePicker } from "antd";
 import { Navigate, useNavigate } from "react-router-dom";
 import { convertDateY } from "../../../utils/utils";
 
 export const Registration = () => {
 
     const navigate = useNavigate();
-    const { fetchRegister, authError, isLoggedIn, clearError } = useAuth();
-
-    useEffect(() => {
-        clearError();
-    }, []);
-
-    useEffect(() => {
-        authError != null && notification.error({ message: 'Ошибка!', description: authError, duration: 5 });
-    }, [authError]);
+    const { fetchRegister, isLoggedIn } = useAuth();
 
     useEffect(() => {
         isLoggedIn && Navigate('/account')

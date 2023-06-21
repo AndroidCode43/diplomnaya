@@ -3,17 +3,14 @@ import {devtools} from "zustand/middleware";
 import {parseError} from "../utils/utils";
 import Cookies from 'js-cookie';
 import yttAxios from "../utils/axios_settings";
+import { notification } from "antd";
 
 export const useAuth = create(devtools(setState => ({
-    authError: null,
     admin: null,
     user: null,
     isLoggedIn: false,
 
-    clearError: () => setState({authError: null}),
-
     fetchAuthLogin: async (user) =>{
-        setState({authError: null});
         try {
             const { data } = await yttAxios.post(`/auth/login`, user);
             Cookies.set('token', data.token, {
@@ -26,14 +23,20 @@ export const useAuth = create(devtools(setState => ({
             });
             setState({isLoggedIn: true});
         }catch (e){
-            setState({authData: null, authError: parseError(e)});
+            setState({authData: null});
+            notification.error({ message: 'Ошибка!', description: parseError(e), duration: 5 });
         }
     },
 
     fetchRegister: async (user) =>{
-        setState({authError: null});
+        const u = {
+            ...user, 
+            name: user.name.trim(),
+            passportNumber: user.passportNumber.trim(),
+            dob: user.dob.trim()
+        };
         try {
-            const { data } = await yttAxios.post(`/auth/registration`, user);
+            const { data } = await yttAxios.post(`/auth/registration`, u);
             Cookies.set('token', data.token, {
                 expires: 7,
                 path: '/'
@@ -44,7 +47,8 @@ export const useAuth = create(devtools(setState => ({
             });
             setState({isLoggedIn: true});
         }catch (e){
-            setState({authData: null, authError: parseError(e)});
+            setState({authData: null});
+            notification.error({ message: 'Ошибка!', description: parseError(e), duration: 5 });
         }
     },
 
