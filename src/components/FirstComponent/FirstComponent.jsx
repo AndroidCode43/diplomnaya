@@ -1,11 +1,10 @@
 import styles from "./FirstComponent.module.scss";
 import { HiOutlineCheckCircle } from "react-icons/hi";
-import {useTickets} from "../../stores/tickets";
-import {useEffect} from "react";
+import { useTickets } from "../../stores/tickets";
 
 export const FirstComponent = (props) => {
 
-    const {setClassTicket} = useTickets();
+    const { setClassTicket } = useTickets();
 
     return <>
         <div className={styles.create_first_container} onClick={() => setClassTicket('F', props.price)}>
@@ -45,10 +44,17 @@ export const FirstComponent = (props) => {
 
                 <div className={styles.divider} />
 
-                <div className={styles.create_first_price_container}>
-                    <p className={styles.create_first_price}>{props.price}₽</p>
-                    <p className={styles.create_first_price_desc}>{props.price}₽ за 1 билет</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div className={styles.create_first_price_container}>
+                        <p className={styles.create_first_price}>{props.price}₽</p>
+                        <p className={styles.create_first_price_desc}>{props.price}₽ за 1 билет</p>
+                    </div>
+
+                    <div>
+                        <p style={{ fontWeight: '600', fontSize: '0.9rem' }}>Доступно: <span style={{ fontWeight: '400' }}>{props.available} мест</span></p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </>

@@ -48,3 +48,7 @@ export const convertDateY = (e) => {
 export const convertSeatTypeToMoney = (flightData, seatType) => 
 flightData != null ?
 seatType === 'F' ? flightData.pricePremium : seatType === 'E' ? flightData.priceEconomy : seatType === 'B' ? flightData.priceBusiness : null : '';
+
+export const validateNumberPass = (n) => {
+    return !RegExp("^.*[^A-zА-яЁё].*$") && n;
+}

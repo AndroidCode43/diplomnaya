@@ -1,10 +1,10 @@
 import { HiOutlineCheckCircle } from "react-icons/hi";
 import "./EconomyComponent.scss";
-import {useTickets} from "../../stores/tickets";
+import { useTickets } from "../../stores/tickets";
 
 export const EconomyComponent = (props) => {
 
-    const {setClassTicket} = useTickets();
+    const { setClassTicket } = useTickets();
 
     return (
         <>
@@ -36,9 +36,15 @@ export const EconomyComponent = (props) => {
 
                     <div className="divider" />
 
-                    <div className="create_economy_price_container">
-                        <p className="create_economy_price">{props.price}₽</p>
-                        <p className="create_economy_price_desc">{props.price}₽ за 1 билет</p>
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <div className="create_economy_price_container">
+                            <p className="create_economy_price">{props.price}₽</p>
+                            <p className="create_economy_price_desc">{props.price}₽ за 1 билет</p>
+                        </div>
+
+                        <div>
+                            <p style={{fontWeight: '600', fontSize: '0.9rem'}}>Доступно: <span style={{fontWeight: '400'}}>{props.available} мест</span></p>
+                        </div>
                     </div>
                 </div>
             </div>

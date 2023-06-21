@@ -37,6 +37,7 @@ export const useTickets = create(devtools(setState => ({
         try {
             await yttAxios.post(`/tickets/buy_ticket?seatType=${seatType}&flightId=${flightId}`);
             setState({isLoading: false});
+            notification.success({message: 'Билет был успешно куплен!',description: 'Он отобразиться в личном кабинете.', duration: 5});
         }catch (e){
             setState({isLoading: false});
             notification.error({message: 'Ошибка при оплате!', description: parseError(e), duration: 5});

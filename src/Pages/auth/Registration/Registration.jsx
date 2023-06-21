@@ -3,18 +3,28 @@ import { LayoutHeader } from "../../../components/LayoutHeader/LayoutHeader";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../stores/auth";
 import { DatePicker } from "antd";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { convertDateY } from "../../../utils/utils";
+import Cookies from "js-cookie";
 
 export const Registration = () => {
 
     const navigate = useNavigate();
     const { fetchRegister, isLoggedIn } = useAuth();
 
-    useEffect(() => {
-        isLoggedIn && Navigate('/account')
-    }, [isLoggedIn]);
+    const role = Cookies.get('role');
+    const token = Cookies. get('token');
 
+    useEffect(() => {
+        if(role && token){
+            navigate('/account');
+        }
+    },[]);
+
+    useEffect(() => {
+        isLoggedIn && window.location.reload(true);
+    }, [isLoggedIn]);
+    
     const [values, setValues] = useState({
         name: '',
         email: '',
@@ -26,6 +36,15 @@ export const Registration = () => {
     const updateValues = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
+
+    const updatePassNumber = (e) => {
+        setValues({...values, [e.target.name]: e.target.value.replace(/\D/g,'')});
+    } 
+
+    const updateFIO = (e) => {
+        setValues({...values, [e.target.name]: e.target.value.replace(/\w/g,'')});
+    }
+
     const updateDob = (e) => {
         return e != null ? setValues({ ...values, 'dob': convertDateY(e) })
             : setValues({ ...values, 'dob': '' });
@@ -35,10 +54,6 @@ export const Registration = () => {
         window.event.preventDefault();
         fetchRegister(values);
     }
-
-    useEffect(() => {
-        console.log(values);
-    },[values]);
 
     return (
         <>
@@ -57,7 +72,7 @@ export const Registration = () => {
                             <div className={styles.custom_input}>
                                 <p className={styles.title}>ФИО</p>
                                 <div>
-                                    <input placeholder='Введите ФИО' name='name' onChange={(e) => updateValues(e)} />
+                                    <input placeholder='Введите ФИО' name='name' value={values.name} onChange={(e) => updateFIO(e)} />
                                 </div>
                             </div>
 
@@ -78,7 +93,7 @@ export const Registration = () => {
                             <div className={styles.custom_input}>
                                 <p className={styles.title}>Серия и номер паспорта</p>
                                 <div>
-                                    <input placeholder='Серия и номер' maxLength={10} name='passportNumber' onChange={(e) => updateValues(e)} />
+                                    <input placeholder='Серия и номер' maxLength={10} name='passportNumber' value={values.passportNumber} onChange={(e) => updatePassNumber(e)} />
                                 </div>
                             </div>
 

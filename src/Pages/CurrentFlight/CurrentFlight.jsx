@@ -38,7 +38,8 @@ export const CurrentFlight = () => {
     }
 
     const { fromCity, flightTime, arrivalTime, flightDate, intoCity,
-        priceEconomy, priceBusiness, pricePremium } = currentFlight;
+        priceEconomy, priceBusiness, pricePremium,
+        seatsEconomy, seatsBusiness, seatsPremium } = currentFlight;
 
     const clickBuyTicketBtn = () => {
         if (selectClassTicket == null || selectClassTicket.type == null) {
@@ -87,9 +88,9 @@ export const CurrentFlight = () => {
                 </div>
 
                 <div className={styles.current_flight_class_sections}>
-                    <EconomyComponent price={priceEconomy} />
-                    <PremiumComponent price={priceBusiness} />
-                    <FirstComponent price={pricePremium} />
+                    <EconomyComponent price={priceEconomy} available={seatsEconomy}/>
+                    <PremiumComponent price={priceBusiness} available={seatsBusiness}/>
+                    <FirstComponent price={pricePremium} available={seatsPremium}/>
                     <Button className={styles.buy_ticket_btn} loading={isLoading} onClick={() => clickBuyTicketBtn()}>Купить билет за {selectClassTicket?.price}₽</Button>
                 </div>
             </div>

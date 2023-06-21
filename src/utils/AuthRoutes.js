@@ -3,5 +3,6 @@ import {Navigate, Outlet} from "react-router-dom";
 
 export const AuthRoutes = () => {
     const token = Cookies.get('token');
-    return token != undefined ? <Outlet/> : <Navigate to={'/login'}/>;
+    const role = Cookies.get('role');
+    return !token || !role ? <Navigate to={'/login'}/> : <Outlet/>;
 }
