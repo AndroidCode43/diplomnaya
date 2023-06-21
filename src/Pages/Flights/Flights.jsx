@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { FlightComponent } from "../../components/FlightComponent/FlightComponent";
 import styles from "./Flights.module.scss";
-import { Navbar } from "../../components/Navbar/Navbar";
 import { useFlights } from "../../stores/flights";
-import imgBg from "../../assets/svg_planet.svg";
 import { SearchFlightComponent } from "../../components/SearchFlightComponent/SearchFlightComponent";
 import { shallow } from "zustand/shallow";
 import { LoadingComponent } from "../../components/LoadingComponent/LoadingComponent";

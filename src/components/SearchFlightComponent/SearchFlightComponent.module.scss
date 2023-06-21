@@ -3,6 +3,10 @@
     align-items: center;
     gap: 0.3rem;
 
+    @media(max-width: 700px) {
+        flex-direction: column;
+    }
+
     .item_left_container{
         padding: 0.5rem;
         border-top-left-radius: 0.7rem;
@@ -15,6 +19,11 @@
         backdrop-filter: blur(3px); 
         color: black;
         font-weight: 600;
+
+        @media(max-width: 700px) {
+            flex-direction: column;
+            border-radius: 0.5rem;
+        }
 
         input{
             background: transparent;
@@ -37,6 +46,11 @@
         backdrop-filter: blur(3px); 
         color: black;
         font-weight: 600;
+
+        @media(max-width: 700px) {
+            flex-direction: column;
+            border-radius: 0.5rem;
+        }
 
         input{
             background: transparent;
@@ -61,6 +75,11 @@
         backdrop-filter: blur(3px); 
         color: black;
         font-weight: 600;
+
+        @media(max-width: 700px) {
+            flex-direction: column;
+            border-radius: 0.5rem;
+        }
 
         .search_button{
             background: #007FFE;

@@ -45,7 +45,6 @@ export const People = () => {
 
     return <>
         <LayoutHeader>
-
             <div className={styles.people_container}>
                 <div className={styles.tickets_header}>
                     <h1>Список пользователей</h1>
@@ -58,7 +57,7 @@ export const People = () => {
                         <div className={styles.filter_container}>
                             <Input prefix={<UserOutlined />} placeholder="Поиск по ФИО" style={{ width: 'fit-content' }} name="name" onChange={(e) => updateValues(e)} />
                             <Input prefix={<CiPassport1 />} placeholder="Номер паспорта" style={{ width: 'fit-content' }} name="passport" onChange={(e) => updateValues(e)} />
-                            <DatePicker placeholder="Дата рождения" name="flightDate" onChange={(e) => updateDob(e)}/>
+                            <DatePicker placeholder="Дата рождения" name="flightDate" style={{width: 'fit-content'}} onChange={(e) => updateDob(e)}/>
                         </div>
                         <p>Найдено {users?.length} пользователей</p>
                     </div>

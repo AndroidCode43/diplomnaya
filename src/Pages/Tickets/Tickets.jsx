@@ -55,7 +55,7 @@ export const Tickets = () => {
                         <div className={styles.filter_container}>
                             <Input prefix={<UserOutlined />} placeholder="Поиск по ФИО" style={{ width: 'fit-content' }} name="userName" onChange={(e) => updateValues(e)}/>
                             <Input prefix={<MdFlightTakeoff />} placeholder="Название рейса" style={{ width: 'fit-content' }} name="flightName" onChange={(e) => updateValues(e)}/>
-                            <DatePicker placeholder="Дата вылета" name="flightDate" onChange={(e) => updateFlightDate(e)}/>
+                            <DatePicker placeholder="Дата вылета" name="flightDate" style={{width: 'fit-content'}} onChange={(e) => updateFlightDate(e)}/>
                         </div>
                         <p>Найдено билетов: {tickets?.length}</p>
                     </div>

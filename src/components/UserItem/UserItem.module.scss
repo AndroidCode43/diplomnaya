@@ -50,10 +50,12 @@
         .name {
             color: black;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .other {
             color: #9b9b9b;
+            white-space: nowrap;
         }
     }
 

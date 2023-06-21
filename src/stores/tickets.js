@@ -21,9 +21,11 @@ export const useTickets = create(devtools(setState => ({
 
     fetchCreateTicket: async (ticket, flightId) => {
         setState({errCreateTicket: null, isLoading: true});
+        const validTicket = {...ticket, passengerName: ticket.passengerName.trim()};
         try {
-            await yttAxios.post(`/tickets/create_ticket/${flightId}`, ticket);
+            await yttAxios.post(`/tickets/create_ticket/${flightId}`, validTicket);
             setState({isLoading: false});
+            notification.success({message: 'Билет был успешно создан!', duration: 5});
         }catch (e){
             setState({isLoading: false});
             notification.error({message: 'Ошибка при создании билета!', description: parseError(e), duration: 5});

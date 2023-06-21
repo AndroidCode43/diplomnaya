@@ -14,6 +14,9 @@ export const useFlights = create(devtools(setState => ({
         setState({isUploading: true});
         const updateData = {
             ...flight,
+            nameFlight: flight.nameFlight.trim(),
+            fromCity: flight.fromCity.trim(),
+            intoCity: flight.intoCity.trim(),
             arrivalTime: +flight.arrivalTime,
             priceEconomy: +flight.priceEconomy,
             priceBusiness: +flight.priceBusiness,

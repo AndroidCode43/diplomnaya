@@ -5,18 +5,18 @@ import { useEffect, useState } from "react";
 import { MdPermIdentity, MdSearch } from "react-icons/md";
 import { FaPassport } from "react-icons/fa";
 import { TicketComponent } from "../../components/TicketComponent/TicketComponent";
-import {useDebounce} from "../../hooks/debounce";
-import {useFlights} from "../../stores/flights";
-import {useTickets} from "../../stores/tickets";
-import {Button, notification} from "antd";
-import {LayoutHeader} from "../../components/LayoutHeader/LayoutHeader";
-import { convertSeatTypeToMoney } from "../../utils/utils";
+import { useDebounce } from "../../hooks/debounce";
+import { useFlights } from "../../stores/flights";
+import { useTickets } from "../../stores/tickets";
+import { Button, notification } from "antd";
+import { LayoutHeader } from "../../components/LayoutHeader/LayoutHeader";
+import { convertDate, convertDateAndTime, convertSeatTypeToMoney } from "../../utils/utils";
 
 export const CreateTicket = () => {
 
-    const {flights, fetchGetFlightByCity} = useFlights();
-    
-    const {fetchCreateTicket, isLoading} = useTickets((state) => ({
+    const { flights, fetchGetFlightByCity } = useFlights();
+
+    const { fetchCreateTicket, isLoading } = useTickets((state) => ({
         fetchCreateTicket: state.fetchCreateTicket,
         isLoading: state.isLoading
     }));
@@ -38,11 +38,15 @@ export const CreateTicket = () => {
 
     useEffect(() => {
         fetchGetFlightByCity(debounce.fromCity, debounce.intoCity);
-    },[debounce]);
+    }, [debounce]);
 
     useEffect(() => {
         flights.length > 0 ? setIsDrop(true) : setIsDrop(false);
-    },[flights]);
+    }, [flights]);
+
+    useEffect(() => {
+        console.log(selectFlight);
+    }, [selectFlight]);
 
     const updateValues = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
@@ -58,7 +62,7 @@ export const CreateTicket = () => {
 
     const createTicketClick = () => {
         selectFlight != null ? fetchCreateTicket(values, selectFlight.id) :
-            notification.error({message: 'Ошибка!', description: 'Для создания билета необходимо выбрать класс!', duration: 5});
+            notification.error({ message: 'Ошибка!', description: 'Для создания билета необходимо выбрать класс!', duration: 5 });
     }
 
     return (
@@ -79,7 +83,7 @@ export const CreateTicket = () => {
                                                 <p className="title">Фио пассажира</p>
                                                 <div className="input_border">
                                                     <MdPermIdentity />
-                                                    <input placeholder="Введите фио" name='passengerName' maxLength={50} onChange={(e) => updateValues(e)}/>
+                                                    <input placeholder="Введите фио" name='passengerName' maxLength={50} onChange={(e) => updateValues(e)} />
                                                 </div>
                                             </div>
 
@@ -87,7 +91,7 @@ export const CreateTicket = () => {
                                                 <p className="title">Серия и номер паспорта</p>
                                                 <div className="input_border">
                                                     <FaPassport />
-                                                    <input placeholder="Серия и номер" name='passengerPassport' maxLength={10} onChange={(e) => updateValues(e)}/>
+                                                    <input placeholder="Серия и номер" name='passengerPassport' maxLength={10} onChange={(e) => updateValues(e)} />
                                                 </div>
                                             </div>
 
@@ -103,7 +107,7 @@ export const CreateTicket = () => {
                                                     <p className="title">Место прилёта</p>
                                                     <div className="input_border">
                                                         <MdSearch />
-                                                        <input placeholder="Место прилёта" name='intoCity' value={selectFlight?.intoCity} maxLength={50} onChange={(e) => updateSearch(e)} />
+                                                        <input placeholder="Место прилёта" name='intoCity' maxLength={50} onChange={(e) => updateSearch(e)} />
                                                     </div>
                                                 </div>
                                                 {
@@ -111,7 +115,31 @@ export const CreateTicket = () => {
                                                         {
                                                             flights?.map((flight) => {
                                                                 return <div className="dropdown_item" onClick={() => selectFlightClick(flight)}>
-                                                                    {flight.fromCity} -> {flight.intoCity}
+                                                                    <div className="flight_date">
+                                                                        <div className="name">{flight.nameFlight}</div>
+                                                                        
+                                                                        <div className="cities">{flight.fromCity}-{flight.intoCity}</div>    
+                                                                    </div>
+
+                                                                    <div className="flight_date">
+                                                                        <div className="date">{convertDate(flight.flightDate)}</div>
+
+                                                                        <div className="date">{convertDateAndTime(flight.flightDate, flight.flightTime, flight.arrivalTime)[0]}</div>
+                                                                    </div>
+                                                                
+                                                                    <div className="flight_date">
+                                                                        <div>{flight.flightTime}</div>
+
+                                                                        <div className="time">{flight.arrivalTime}<span>мин</span></div>
+
+                                                                        <div>{convertDateAndTime(flight.flightDate, flight.flightTime, flight.arrivalTime)[1]}</div>
+                                                                    </div>
+
+                                                                    <div className="flight_date">
+                                                                        <div className="price">{flight.priceEconomy}₽</div>
+                                                                        <div className="price">{flight.priceBusiness}₽</div>
+                                                                        <div className="price">{flight.pricePremium}₽</div>
+                                                                    </div>
                                                                 </div>
                                                             })
                                                         }
@@ -133,11 +161,11 @@ export const CreateTicket = () => {
                                                 <h4>Эконом</h4>
                                             </div>
                                             <div className='item_container'>
-                                                <input type='radio' name="seatType" value='B' onClick={(e) => updateValues(e)}/>
+                                                <input type='radio' name="seatType" value='B' onClick={(e) => updateValues(e)} />
                                                 <h4>Бизнесс</h4>
                                             </div>
                                             <div className='item_container'>
-                                                <input type='radio' name="seatType" value='F' onClick={(e) => updateValues(e)}/>
+                                                <input type='radio' name="seatType" value='F' onClick={(e) => updateValues(e)} />
                                                 <h4>Первый</h4>
                                             </div>
                                         </div>
@@ -201,7 +229,7 @@ export const CreateTicket = () => {
                             <TicketComponent data={{
                                 ...selectFlight,
                                 ...values
-                            }}/>
+                            }} />
 
                         </div>
                     </div>
